@@ -52,7 +52,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${ambitFont.variable} scroll-smooth`}>
-      <body className="font-sans antialiased bg-slate-950 text-slate-100 min-h-screen selection:bg-cyan-500 selection:text-white">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+        />
+      </head>
+      <body className="font-sans antialiased bg-[#0b0f17] text-slate-100 min-h-screen selection:bg-[#2ec4b6] selection:text-slate-950">
         {children}
       </body>
     </html>
