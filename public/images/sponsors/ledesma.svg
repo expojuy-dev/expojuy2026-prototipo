@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80" width="100%" height="100%">
+  <!-- Ledesma Official Logo -->
+  <rect width="300" height="80" fill="transparent"/>
+  <g transform="translate(20, 16)">
+    <!-- Palm leaf emblem -->
+    <path d="M24,4 C14,14 12,28 24,44 C36,28 34,14 24,4 Z" fill="#007A3D"/>
+    <path d="M12,18 C6,24 6,32 14,38 C20,30 20,22 12,18 Z" fill="#2BB673"/>
+    <path d="M36,18 C42,24 42,32 34,38 C28,30 28,22 36,18 Z" fill="#2BB673"/>
+  </g>
+  <text x="75" y="48" font-family="'Plus Jakarta Sans', 'Segoe UI', Georgia, serif" font-size="32" font-weight="700" fill="#007A3D" letter-spacing="1">Ledesma</text>
+  <text x="215" y="32" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="bold" fill="#007A3D">®</text>
+  <text x="75" y="62" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" fill="#6c7a77" letter-spacing="1.5">DESDE 1908 • JUJUY</text>
+</svg>
