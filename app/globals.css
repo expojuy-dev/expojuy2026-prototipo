@@ -1,26 +1,45 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --font-ambit-family: var(--font-ambit), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    
+    /* Tokens del sistema de diseño oficial de Stitch */
+    --color-primary: #006a62;
+    --color-primary-container: #2ec4b6;
+    --color-on-primary-container: #004c46;
+    --color-secondary: #8b3d9e;
+    --color-secondary-container: #ed95fd;
+    --color-surface-tint: #006a62;
+    --color-background: #0b0f17;
+  }
+
+  body {
+    font-family: var(--font-ambit-family);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Efectos de resplandor e iluminación */
+.glow-primary {
+  box-shadow: 0 0 35px -8px rgba(46, 196, 182, 0.35);
+}
+
+.glow-secondary {
+  box-shadow: 0 0 35px -8px rgba(139, 61, 158, 0.35);
+}
+
+/* Scrollbar estilizada */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2ec4b6;
 }
