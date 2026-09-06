@@ -14,7 +14,7 @@ export function Hero() {
 
   useEffect(() => {
     const targetDate = new Date("2026-10-10T09:00:00").getTime();
-    const updateTimer = () => {
+    const updateClock = () => {
       const now = new Date().getTime();
       const difference = targetDate - now;
 
@@ -28,119 +28,130 @@ export function Hero() {
       }
     };
 
-    updateTimer();
-    const interval = setInterval(updateTimer, 1000);
+    updateClock();
+    const interval = setInterval(updateClock, 1000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <section
       id="inicio"
-      className="relative min-h-[92vh] flex items-center justify-center overflow-hidden pt-24 pb-16 bg-[#1b1c1c]"
+      className="relative min-h-[96vh] lg:min-h-[98vh] flex items-center justify-center overflow-hidden -mt-20 pt-28 pb-space-4xl"
     >
-      {/* Fondo con imagen y gradientes cian & violeta de la maqueta Stitch */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1b1c1c]/90 via-[#7B2D8E]/75 to-[#1b1c1c]/95 z-10" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_35%,rgba(46,196,182,0.35),transparent_50%)] z-10" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_65%,rgba(139,61,158,0.4),transparent_55%)] z-10" />
+      {/* Live YouTube Background Video Backdrop (Starts at 0:40 to avoid big intro text slides) */}
+      <div className="absolute inset-0 z-0 overflow-hidden bg-[#121314] pointer-events-none">
+        {/* YouTube Video Wrapper centered and scaled for full cover */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] opacity-60 scale-110">
+          <iframe
+            src="https://www.youtube.com/embed/-3c7nv9c2xc?autoplay=1&mute=1&controls=0&loop=1&playlist=-3c7nv9c2xc&start=40&end=85&playsinline=1&enablejsapi=1&rel=0&modestbranding=1"
+            title="ExpoJuy Background Video"
+            className="w-full h-full border-0 pointer-events-none object-cover"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          />
+        </div>
+
+        {/* Dark Gradient Scrim Overlay for Maximum Contrast & Vibrancy */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1b1c1c]/80 via-[#7B2D8E]/60 to-[#1b1c1c]/95 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_35%,rgba(46,196,182,0.2),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_65%,rgba(139,61,158,0.25),transparent_55%)]" />
       </div>
 
-      <div className="relative z-20 max-w-[1280px] w-full mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
-        {/* Date & Venue Pill Badge */}
-        <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-5 py-2 rounded-full shadow-lg mb-6">
-          <span className="flex h-2.5 w-2.5 relative">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2ec4b6] opacity-75" />
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#2ec4b6]" />
-          </span>
-          <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-[#70f8e8]">
+      <div className="relative z-10 max-w-[1280px] w-full mx-auto px-gutter-mobile lg:px-gutter-desktop flex flex-col items-center text-center">
+        {/* Date & Venue Pill Badge (Subtle & Compact) */}
+        <div className="inline-flex items-center bg-surface-container-lowest/20 backdrop-blur-md px-4 py-1 rounded-full border border-white/10 shadow-md mb-space-md">
+          <span className="text-xs uppercase tracking-widest text-primary-fixed font-semibold">
             10 al 19 de Octubre 2026 • Ciudad Cultural, Jujuy
           </span>
         </div>
 
-        {/* Isologotipo oficial */}
-        <div className="relative w-28 h-28 sm:w-36 sm:h-36 mb-4">
-          <Image
-            src="/images/brand/expojuy26_isologotipo.png"
-            alt="ExpoJuy 2026 Isologotipo"
-            fill
-            className="object-contain drop-shadow-2xl"
-            priority
-          />
+        {/* Main Logo / Monogram Graphic */}
+        <div className="mb-space-md flex items-center justify-center">
+          <div className="relative h-24 sm:h-28 md:h-32 w-32 sm:w-40 md:w-48">
+            <Image
+              src="/images/brand/expojuy26_isologotipo.png"
+              alt="ExpoJuy 2026 Isologotipo"
+              fill
+              className="object-contain drop-shadow-2xl"
+              priority
+            />
+          </div>
         </div>
 
-        {/* Title */}
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight max-w-4xl leading-tight">
+        {/* Primary Title & Subtitle */}
+        <h1 className="font-display-hero text-display-hero-mobile lg:text-display-hero text-on-primary tracking-tight max-w-4xl font-extrabold">
           Conectando Países,{" "}
-          <span className="bg-gradient-to-r from-[#2ec4b6] via-[#70f8e8] to-[#ed95fd] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-primary-container via-primary-fixed to-secondary-container bg-clip-text text-transparent">
             Creando Oportunidades
           </span>
         </h1>
-
-        <p className="mt-5 max-w-3xl text-base sm:text-lg text-slate-200 leading-relaxed font-light">
+        <p className="mt-space-md max-w-3xl font-body-lg text-body-lg text-surface-variant leading-relaxed">
           La feria de producción, tecnología, innovación y comercio exterior más trascendente del Norte Argentino. El epicentro estratégico para el NOA, ZICOSUR y el Corredor Bioceánico.
         </p>
 
-        {/* Countdown Timer Grid */}
-        <div className="mt-8 grid grid-cols-4 gap-3 sm:gap-4 w-full max-w-xl">
-          <div className="bg-white/15 backdrop-blur-xl p-3 sm:p-4 rounded-xl text-center shadow-lg">
-            <span className="block text-3xl sm:text-4xl font-bold text-[#70f8e8] leading-none font-mono">
+        {/* Countdown Timer */}
+        <div className="mt-space-2xl grid grid-cols-4 gap-space-xs sm:gap-space-md w-full max-w-xl">
+          <div className="bg-surface-container-lowest/15 backdrop-blur-xl p-space-sm sm:p-space-md rounded-xl text-center shadow-lg">
+            <span className="block font-headline-xl text-headline-xl text-primary-fixed leading-none font-bold">
               {timeLeft.days}
             </span>
-            <span className="text-[10px] sm:text-xs uppercase text-slate-200 tracking-wider mt-1 block">
+            <span className="font-label-sm text-label-sm uppercase text-surface-variant tracking-wider mt-1 block">
               Días
             </span>
           </div>
-          <div className="bg-white/15 backdrop-blur-xl p-3 sm:p-4 rounded-xl text-center shadow-lg">
-            <span className="block text-3xl sm:text-4xl font-bold text-[#4fdbcc] leading-none font-mono">
+          <div className="bg-surface-container-lowest/15 backdrop-blur-xl p-space-sm sm:p-space-md rounded-xl text-center shadow-lg">
+            <span className="block font-headline-xl text-headline-xl text-primary-fixed-dim leading-none font-bold">
               {String(timeLeft.hours).padStart(2, "0")}
             </span>
-            <span className="text-[10px] sm:text-xs uppercase text-slate-200 tracking-wider mt-1 block">
+            <span className="font-label-sm text-label-sm uppercase text-surface-variant tracking-wider mt-1 block">
               Horas
             </span>
           </div>
-          <div className="bg-white/15 backdrop-blur-xl p-3 sm:p-4 rounded-xl text-center shadow-lg">
-            <span className="block text-3xl sm:text-4xl font-bold text-[#fdd6ff] leading-none font-mono">
+          <div className="bg-surface-container-lowest/15 backdrop-blur-xl p-space-sm sm:p-space-md rounded-xl text-center shadow-lg">
+            <span className="block font-headline-xl text-headline-xl text-secondary-fixed leading-none font-bold">
               {String(timeLeft.minutes).padStart(2, "0")}
             </span>
-            <span className="text-[10px] sm:text-xs uppercase text-slate-200 tracking-wider mt-1 block">
+            <span className="font-label-sm text-label-sm uppercase text-surface-variant tracking-wider mt-1 block">
               Min
             </span>
           </div>
-          <div className="bg-white/15 backdrop-blur-xl p-3 sm:p-4 rounded-xl text-center shadow-lg">
-            <span className="block text-3xl sm:text-4xl font-bold text-[#f4aeff] leading-none font-mono">
+          <div className="bg-surface-container-lowest/15 backdrop-blur-xl p-space-sm sm:p-space-md rounded-xl text-center shadow-lg">
+            <span className="block font-headline-xl text-headline-xl text-secondary-fixed-dim leading-none font-bold">
               {String(timeLeft.seconds).padStart(2, "0")}
             </span>
-            <span className="text-[10px] sm:text-xs uppercase text-slate-200 tracking-wider mt-1 block">
+            <span className="font-label-sm text-label-sm uppercase text-surface-variant tracking-wider mt-1 block">
               Seg
             </span>
           </div>
         </div>
 
-        {/* Dual Actions */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+        {/* Hero Actions Trio CTA */}
+        <div className="mt-space-xl flex flex-col sm:flex-row items-center gap-space-md w-full sm:w-auto">
           <a
-            href="#expositores"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-[#1c1b1f] font-bold text-sm bg-gradient-to-r from-[#ed95fd] to-[#8b3d9e] text-white hover:opacity-95 transition-all shadow-[0_8px_20px_-4px_rgba(139,61,158,0.5)]"
+            href="#contacto"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-space-xs rounded-full px-space-xl py-space-sm font-label-lg text-label-lg text-on-primary bg-secondary hover:bg-secondary-container hover:text-on-secondary-container transition-all shadow-[0_8px_20px_-4px_rgba(139,61,158,0.5)] font-semibold"
           >
-            <Store className="w-4 h-4" />
-            Buscar Expositores
+            <Store className="w-5 h-5 shrink-0" />
+            <span>Quiero ser Expositor</span>
           </a>
+
           <a
-            href="#mapa"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-bold text-white bg-gradient-to-r from-[#006a62] to-[#2ec4b6] hover:opacity-95 transition-all shadow-[0_10px_24px_-4px_rgba(46,196,182,0.45)]"
+            href="#entradas"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-space-xs rounded-full px-space-xl py-space-sm font-label-lg text-label-lg text-on-primary bg-gradient-to-r from-primary-container via-primary to-secondary hover:opacity-95 transition-all shadow-[0_10px_24px_-4px_rgba(46,196,182,0.45)] font-semibold"
           >
-            <Ticket className="w-4 h-4" />
-            Descargar Mapa
+            <Ticket className="w-5 h-5 shrink-0" />
+            <span>Comprar Entradas</span>
           </a>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Indicator Scroll */}
         <a
           href="#sobre-expojuy"
-          className="mt-10 inline-flex flex-col items-center gap-1 text-slate-300 hover:text-[#70f8e8] transition-colors"
+          className="mt-space-2xl inline-flex flex-col items-center gap-space-2xs text-surface-variant hover:text-primary-fixed transition-colors"
         >
-          <span className="text-xs tracking-wider uppercase font-semibold">Descubrí más</span>
-          <ArrowDown className="w-4 h-4 animate-bounce" />
+          <span className="font-label-sm text-label-sm tracking-wider uppercase font-semibold">
+            Descubrí más
+          </span>
+          <ArrowDown className="w-5 h-5 animate-bounce" />
         </a>
       </div>
     </section>
