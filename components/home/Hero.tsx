@@ -119,18 +119,18 @@ export function Hero() {
         {/* Dual Actions */}
         <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
           <a
-            href="#contacto"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-semibold text-white bg-[#8b3d9e] hover:bg-[#ed95fd] hover:text-[#340042] transition-all shadow-[0_8px_20px_-4px_rgba(139,61,158,0.5)]"
+            href="#expositores"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-[#1c1b1f] font-bold text-sm bg-gradient-to-r from-[#ed95fd] to-[#8b3d9e] text-white hover:opacity-95 transition-all shadow-[0_8px_20px_-4px_rgba(139,61,158,0.5)]"
           >
             <Store className="w-4 h-4" />
-            Quiero ser Expositor
+            Buscar Expositores
           </a>
           <a
-            href="#entradas"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-semibold text-white bg-gradient-to-r from-[#2ec4b6] via-[#006a62] to-[#8b3d9e] hover:opacity-95 transition-all shadow-[0_10px_24px_-4px_rgba(46,196,182,0.45)]"
+            href="#mapa"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-bold text-white bg-gradient-to-r from-[#006a62] to-[#2ec4b6] hover:opacity-95 transition-all shadow-[0_10px_24px_-4px_rgba(46,196,182,0.45)]"
           >
             <Ticket className="w-4 h-4" />
-            Comprar Entradas
+            Descargar Mapa
           </a>
         </div>
 

@@ -1,63 +1,58 @@
 "use client";
 
 import { useState } from "react";
-import { Navigation, Layers, Eye } from "lucide-react";
+import { Navigation, Layers, Compass, MapPin } from "lucide-react";
 
 interface SectorInfo {
   id: string;
   name: string;
   code: string;
-  color: string;
+  badgeBg: string;
   standsCount: number;
   description: string;
-  highlight: string;
+  categories: string;
 }
 
 const SECTORS: SectorInfo[] = [
   {
     id: "pab-a",
-    name: "Pabellón A - Internacional & Minería",
+    name: "Pabellón A - Tech e Innovación",
     code: "PAB-A",
-    color: "bg-cyan-500/20 border-cyan-500 text-cyan-400",
+    badgeBg: "bg-[#006a62] text-white",
     standsCount: 48,
-    description: "Grandes empresas mineras de litio, delegaciones consulares del Corredor Bioceánico y corporaciones energéticas.",
-    highlight: "Lithium Andes, Cauchari Solar, Cámaras Binacionales",
+    description:
+      "Sector dedicado a empresas de tecnología, inteligencia artificial, startups de software, energías renovables y economía del conocimiento.",
+    categories: "Tech, IA, Startups, Telecom, Energías Verdes",
   },
   {
     id: "pab-b",
-    name: "Pabellón B - Innovación, Tech & PyMEs",
+    name: "Pabellón B - Minería & Litio",
     code: "PAB-B",
-    color: "bg-purple-500/20 border-purple-500 text-purple-400",
+    badgeBg: "bg-[#8b3d9e] text-white",
     standsCount: 64,
-    description: "Startups de software, soluciones con Inteligencia Artificial, laboratorios biotecnológicos y servicios al sector productivo.",
-    highlight: "Polo Tecnológico Jujuy, NeuralJuy AI, AgTech Labs",
+    description:
+      "Grandes corporaciones mineras del Triángulo del Litio, proveedores de equipamiento de alta complejidad y servicios de extracción sustentable.",
+    categories: "Litio, Minería Sustentable, Maquinaria, Logística",
   },
   {
     id: "pab-c",
-    name: "Pabellón C - Agroindustria & Alimentos",
+    name: "Pabellón C - Agroindustria & Comercio",
     code: "PAB-C",
-    color: "bg-emerald-500/20 border-emerald-500 text-emerald-400",
+    badgeBg: "bg-[#231b28] text-white",
     standsCount: 42,
-    description: "Productores de tabaco, caña de azúcar, cítricos, legumbres de exportación y proveedores de maquinaria de precisión.",
-    highlight: "Cámara del Tabaco, Ingenios de Jujuy, EcoMaq Vial",
+    description:
+      "Cadena de valor agroindustrial, tabacaleras, caña de azúcar, cítricos de exportación y proveedores de biotecnología agrícola.",
+    categories: "Agro, Bioeconomía, Comercio Exterior, Alimentos",
   },
   {
-    id: "ext-1",
-    name: "Explanada Exterior & Maquinaria Pesada",
-    code: "EXT",
-    color: "bg-amber-500/20 border-amber-500 text-amber-400",
-    standsCount: 26,
-    description: "Exhibición a cielo abierto de camiones mineros, maquinarias agrícolas, equipos viales e infraestructura solar a gran escala.",
-    highlight: "Flotas pesadas, Maquinaria Vial, Demostraciones en vivo",
-  },
-  {
-    id: "aud",
-    name: "Auditorio Central & Sala B2B",
-    code: "AUD",
-    color: "bg-rose-500/20 border-rose-500 text-rose-400",
-    standsCount: 3,
-    description: "Espacio para conferencias magistrales, firmas de acuerdos de inversión y mesas de rondas bilaterales de negocios.",
-    highlight: "Capacidad para 850 asistentes sentados, traducción simultánea",
+    id: "pab-d",
+    name: "Pabellón D - Desarrollo Regional",
+    code: "PAB-D",
+    badgeBg: "bg-[#a74bc0] text-white",
+    standsCount: 56,
+    description:
+      "Stand institucionales de los gobiernos del ZICOSUR, municipios de Jujuy, artesanías de alta gama y PyMEs locales de exportación.",
+    categories: "Gobiernos, ZICOSUR, Cultura, PyMEs Jujeñas",
   },
 ];
 
@@ -65,178 +60,118 @@ export function VenueMapSection() {
   const [activeSector, setActiveSector] = useState<SectorInfo>(SECTORS[0]);
 
   return (
-    <section id="predio" className="py-24 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-cyan-950/70 border border-cyan-500/30 text-cyan-400 text-xs font-semibold tracking-wide uppercase mb-3">
-            Plano Interactivo
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Mapa del Predio Ferial Ciudad Cultural
+    <section id="mapa" className="py-20 bg-[#fcf9f8] text-slate-900">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="flex flex-col items-start gap-2 mb-10">
+          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-purple-100 text-[#8b3d9e] text-xs font-bold uppercase tracking-wider">
+            Mapa del Predio
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Distribución del Predio Ferial
           </h2>
-          <p className="mt-3 text-slate-400 text-base">
-            Explorá la distribución estratégica de pabellones, salas de conferencias y accesos de la muestra.
+          <p className="text-slate-600 text-sm sm:text-base max-w-2xl">
+            Explora la distribución de pabellones, áreas exteriores y zonas de servicios en el Predio Ferial Ciudad Cultural.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Mapa Visual Interactivo (Esquemático SVG responsivo y moderno) */}
-          <div className="lg:col-span-7 bg-slate-900/90 border border-slate-800 rounded-3xl p-6 relative overflow-hidden shadow-2xl">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2 text-xs text-slate-400">
-                <Layers className="w-4 h-4 text-cyan-400" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          {/* Mapa Visual Esquemático (Left Side Card - Matching Stitch Mockup) */}
+          <div className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm flex flex-col justify-between gap-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 text-xs font-semibold text-slate-600">
+                <Layers className="w-4 h-4 text-[#006a62]" />
                 <span>Superficie Total: 15.000 m²</span>
               </div>
-              <span className="text-[11px] px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 font-medium">
-                Haz clic en una zona para inspeccionar
+              <span className="text-[11px] font-bold text-[#8b3d9e] bg-purple-50 px-3 py-1 rounded-full border border-purple-100">
+                Haz clic para explorar pabellón
               </span>
             </div>
 
-            {/* Representación interactiva SVG estilizada del Predio */}
-            <div className="relative aspect-[16/10] w-full bg-slate-950/80 rounded-2xl border border-slate-800 p-4 flex flex-col justify-between">
-              {/* Acceso Principal */}
-              <div className="flex justify-between items-center px-4 py-2 bg-slate-900 rounded-xl border border-slate-800/80">
-                <div className="flex items-center gap-2">
-                  <Navigation className="w-4 h-4 text-emerald-400" />
-                  <span className="text-xs font-semibold text-slate-200">Acceso Principal & Acreditaciones QR</span>
-                </div>
-                <span className="text-[10px] text-slate-500">Av. de los Estudiantes</span>
-              </div>
-
-              {/* Layout de Pabellones en cuadrícula interactiva */}
-              <div className="grid grid-cols-2 gap-3 my-3 h-full">
-                {/* Pabellón A */}
-                <button
-                  onClick={() => setActiveSector(SECTORS[0])}
-                  className={`rounded-xl p-3.5 border text-left transition-all flex flex-col justify-between ${
-                    activeSector.id === "pab-a"
-                      ? "bg-cyan-950/70 border-cyan-400 shadow-lg shadow-cyan-500/20 scale-[1.02]"
-                      : "bg-slate-900/60 border-slate-800 hover:border-slate-700"
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-extrabold text-cyan-400">PABELLÓN A</span>
-                    <span className="text-[10px] text-slate-400">48 Stands</span>
-                  </div>
-                  <span className="text-sm font-semibold text-white">Internacional & Minería</span>
-                  <span className="text-[10px] text-cyan-300/80">Sector Litio y Comercio Exterior</span>
-                </button>
-
-                {/* Pabellón B */}
-                <button
-                  onClick={() => setActiveSector(SECTORS[1])}
-                  className={`rounded-xl p-3.5 border text-left transition-all flex flex-col justify-between ${
-                    activeSector.id === "pab-b"
-                      ? "bg-purple-950/70 border-purple-400 shadow-lg shadow-purple-500/20 scale-[1.02]"
-                      : "bg-slate-900/60 border-slate-800 hover:border-slate-700"
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-extrabold text-purple-400">PABELLÓN B</span>
-                    <span className="text-[10px] text-slate-400">64 Stands</span>
-                  </div>
-                  <span className="text-sm font-semibold text-white">Innovación & Tech</span>
-                  <span className="text-[10px] text-purple-300/80">Economía del Conocimiento y PyMEs</span>
-                </button>
-
-                {/* Pabellón C */}
-                <button
-                  onClick={() => setActiveSector(SECTORS[2])}
-                  className={`rounded-xl p-3.5 border text-left transition-all flex flex-col justify-between ${
-                    activeSector.id === "pab-c"
-                      ? "bg-emerald-950/70 border-emerald-400 shadow-lg shadow-emerald-500/20 scale-[1.02]"
-                      : "bg-slate-900/60 border-slate-800 hover:border-slate-700"
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-extrabold text-emerald-400">PABELLÓN C</span>
-                    <span className="text-[10px] text-slate-400">42 Stands</span>
-                  </div>
-                  <span className="text-sm font-semibold text-white">Agroindustria & Alimentos</span>
-                  <span className="text-[10px] text-emerald-300/80">Cadenas de Valor Regionales</span>
-                </button>
-
-                {/* Auditorio & Explanada */}
-                <div className="grid grid-rows-2 gap-2">
+            {/* Dibujo Esquemático de Pabellones */}
+            <div className="space-y-4">
+              {/* Fila 1: Pabellones A, B y C */}
+              <div className="grid grid-cols-3 gap-3">
+                {SECTORS.slice(0, 3).map((sector) => (
                   <button
-                    onClick={() => setActiveSector(SECTORS[3])}
-                    className={`rounded-lg p-2 border text-left transition-all flex items-center justify-between ${
-                      activeSector.id === "ext-1"
-                        ? "bg-amber-950/70 border-amber-400 scale-[1.01]"
-                        : "bg-slate-900/60 border-slate-800 hover:border-slate-700"
+                    key={sector.id}
+                    onClick={() => setActiveSector(sector)}
+                    className={`p-4 rounded-2xl text-white font-bold transition-all text-center flex flex-col items-center justify-center min-h-[110px] ${sector.badgeBg} ${
+                      activeSector.id === sector.id
+                        ? "ring-4 ring-[#2ec4b6]/50 scale-[1.03] shadow-lg"
+                        : "opacity-90 hover:opacity-100"
                     }`}
                   >
-                    <div>
-                      <p className="text-[11px] font-bold text-amber-400">Explanada Maquinaria</p>
-                      <p className="text-[9px] text-slate-400">Equipos de gran porte</p>
-                    </div>
-                    <span className="text-[10px] text-slate-400">26 Stands</span>
+                    <span className="text-xs uppercase tracking-wider opacity-80">{sector.code}</span>
+                    <span className="text-sm sm:text-base font-extrabold mt-1">{sector.name.split("-")[0]}</span>
+                    <span className="text-[10px] font-normal opacity-90 mt-1">{sector.standsCount} Stands</span>
                   </button>
-
-                  <button
-                    onClick={() => setActiveSector(SECTORS[4])}
-                    className={`rounded-lg p-2 border text-left transition-all flex items-center justify-between ${
-                      activeSector.id === "aud"
-                        ? "bg-rose-950/70 border-rose-400 scale-[1.01]"
-                        : "bg-slate-900/60 border-slate-800 hover:border-slate-700"
-                    }`}
-                  >
-                    <div>
-                      <p className="text-[11px] font-bold text-rose-400">Auditorio & Rondas B2B</p>
-                      <p className="text-[9px] text-slate-400">850 personas</p>
-                    </div>
-                    <span className="text-[10px] text-slate-400">Cap. Max</span>
-                  </button>
-                </div>
+                ))}
               </div>
 
-              {/* Barra inferior de Servicios */}
-              <div className="flex items-center justify-between text-[11px] text-slate-400 px-3 py-1.5 bg-slate-900/90 rounded-lg border border-slate-800">
-                <span>📍 Patio Gastronómico & Foodtrucks</span>
-                <span>♿ Rampas de Accesibilidad</span>
-                <span>🩺 Puesto Sanitario & Primeros Auxilios</span>
+              {/* Fila 2: Pabellón D */}
+              <button
+                onClick={() => setActiveSector(SECTORS[3])}
+                className={`w-full p-4 rounded-2xl text-white font-bold transition-all text-center flex flex-col items-center justify-center min-h-[90px] ${SECTORS[3].badgeBg} ${
+                  activeSector.id === SECTORS[3].id
+                    ? "ring-4 ring-[#2ec4b6]/50 scale-[1.01] shadow-lg"
+                    : "opacity-90 hover:opacity-100"
+                }`}
+              >
+                <span className="text-xs uppercase tracking-wider opacity-80">{SECTORS[3].code}</span>
+                <span className="text-sm sm:text-base font-extrabold mt-0.5">{SECTORS[3].name}</span>
+                <span className="text-[10px] font-normal opacity-90">{SECTORS[3].standsCount} Stands</span>
+              </button>
+
+              {/* Fila 3: Zonas Exteriores y Gastronomía */}
+              <div className="w-full p-3 rounded-2xl bg-slate-100 text-slate-700 text-center text-xs font-bold border border-slate-200/80 flex items-center justify-center gap-2">
+                <Navigation className="w-4 h-4 text-[#006a62]" />
+                <span>EXTERIORES / PATIO GASTRANÓMICO / ESCENARIO DE SHOWS</span>
               </div>
+            </div>
+
+            {/* Referencias del Mapa */}
+            <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-slate-600 pt-2 border-t border-slate-100">
+              <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-[#006a62]" /> Pabellón A</span>
+              <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-[#8b3d9e]" /> Pabellón B</span>
+              <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-[#231b28]" /> Pabellón C</span>
+              <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-[#a74bc0]" /> Pabellón D</span>
             </div>
           </div>
 
-          {/* Panel de Información del Sector Seleccionado */}
-          <div className="lg:col-span-5 bg-slate-900/80 border border-slate-800 rounded-3xl p-7 flex flex-col justify-between h-full">
+          {/* Ficha Detallada del Pabellón (Right Side Card - Matching Stitch Mockup) */}
+          <div className="lg:col-span-5 bg-[#f0faf8] rounded-3xl p-6 sm:p-8 border border-teal-100 shadow-sm flex flex-col justify-between gap-6">
             <div>
-              <div className="flex items-center justify-between mb-4">
-                <span className={`text-xs font-bold px-3 py-1 rounded-full border ${activeSector.color}`}>
-                  {activeSector.code}
-                </span>
-                <span className="text-xs text-slate-400 font-medium">{activeSector.standsCount} Stands asignados</span>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#006a62]/10 text-[#006a62] text-xs font-bold uppercase tracking-wider mb-3">
+                <MapPin className="w-3.5 h-3.5" />
+                Pabellón Seleccionado
               </div>
 
-              <h3 className="text-2xl font-bold text-white mb-3">{activeSector.name}</h3>
+              <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+                {activeSector.name}
+              </h3>
 
-              <p className="text-sm text-slate-300 leading-relaxed font-light mb-6">
+              <p className="mt-4 text-slate-700 text-sm leading-relaxed">
                 {activeSector.description}
               </p>
 
-              <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800/80 mb-6">
-                <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-1.5">
-                  <Eye className="w-3.5 h-3.5 text-cyan-400" />
-                  Empresas y referentes clave en esta zona:
-                </p>
-                <p className="text-sm font-medium text-cyan-300">{activeSector.highlight}</p>
+              <div className="mt-6 space-y-3 bg-white p-4 rounded-2xl border border-teal-100 text-xs">
+                <div className="flex justify-between items-center text-slate-700">
+                  <span className="font-medium text-slate-500">Capacidad Total de Stands:</span>
+                  <span className="font-bold text-slate-900">{activeSector.standsCount} Espacios</span>
+                </div>
+                <div className="flex justify-between items-center text-slate-700">
+                  <span className="font-medium text-slate-500">Sectores Principales:</span>
+                  <span className="font-bold text-[#006a62]">{activeSector.categories}</span>
+                </div>
               </div>
             </div>
 
-            <div className="pt-6 border-t border-slate-800 flex flex-col sm:flex-row gap-3">
-              <a
-                href="#expositores"
-                className="flex-1 text-center text-xs font-semibold py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 transition-all font-bold"
-              >
-                Ver Expositores de este Pabellón
-              </a>
-              <a
-                href="#contacto"
-                className="flex-1 text-center text-xs font-semibold py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all"
-              >
-                Solicitar Reserva de Stand
-              </a>
+            <div className="pt-4">
+              <button className="w-full inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold text-white bg-gradient-to-r from-[#8b3d9e] to-[#6b267d] hover:opacity-95 transition-all shadow-md shadow-purple-900/20">
+                <Compass className="w-4 h-4" />
+                Ver Plano Interactivo 3D
+              </button>
             </div>
           </div>
         </div>

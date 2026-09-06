@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Sparkles, Send, Bot, User, HelpCircle, Loader2 } from "lucide-react";
+import { Bot, X, Send, Sparkles, User, HelpCircle } from "lucide-react";
 
 interface Message {
   role: "assistant" | "user";
@@ -12,14 +12,15 @@ const PRESET_QUERIES = [
   "¿Dónde están los stands de minería y litio?",
   "¿Cómo me anoto en las rondas de negocios?",
   "¿Cuáles son los horarios y días del evento?",
-  "¿Qué accesibilidad tiene el predio para movilidad reducida?",
+  "¿Dónde comprar entradas?",
 ];
 
 export function AiAssistantSection() {
+  const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      text: "¡Hola! Soy JuyBot, el Asistente Inteligente de ExpoJuy 2026. Estoy aquí para orientarte sobre la agenda de conferencias, ubicación de expositores, acreditaciones y pabellones. ¿En qué te puedo ayudar hoy?",
+      text: "¡Hola! Soy JuyBot, el Asistente Virtual IA de ExpoJuy 2026. ¿En qué puedo ayudarte hoy con la feria, expositores o acreditaciones?",
     },
   ]);
   const [input, setInput] = useState("");
@@ -35,87 +36,96 @@ export function AiAssistantSection() {
     setIsTyping(true);
 
     setTimeout(() => {
-      let botReply = "Con gusto. En ExpoJuy 2026 disponemos de acreditaciones online y presenciales en Ciudad Cultural. Te invitamos a recorrer el Pabellón correspondiente o consultar en Informes de la Cámara de Comercio Exterior.";
+      let botReply =
+        "Con gusto. En ExpoJuy 2026 disponemos de acreditaciones online y presenciales en Ciudad Cultural. Te invitamos a recorrer el Pabellón correspondiente o consultar en Informes.";
 
       const lower = textToSend.toLowerCase();
       if (lower.includes("litio") || lower.includes("mineria") || lower.includes("minería")) {
-        botReply = "Los principales referentes de Minería y Litio Sustentable se encuentran concentrados en el Pabellón A (Internacional) y en las conferencias del Auditorio Central sobre el futuro del Triángulo del Litio.";
+        botReply =
+          "Los principales referentes de Minería y Litio Sustentable se encuentran concentrados en el Pabellón A (Internacional & Minería) y en las conferencias del Auditorio Central.";
       } else if (lower.includes("negocio") || lower.includes("ronda") || lower.includes("b2b")) {
-        botReply = "Las Rondas de Negocios B2B del Corredor Bioceánico se realizarán en la Sala Internacional con coordinación directa de la Cámara de Comercio Exterior de Jujuy. Podés solicitar acreditación empresarial en la sección de Contacto.";
+        botReply =
+          "Las Rondas de Negocios B2B se realizarán en la Sala B2B con coordinación de la Cámara de Comercio Exterior de Jujuy. Podés solicitar tu acreditación en el apartado de Contacto.";
       } else if (lower.includes("horario") || lower.includes("fecha") || lower.includes("dias") || lower.includes("días")) {
-        botReply = "ExpoJuy 2026 tendrá lugar del 9 al 18 de Octubre de 2026 en la Ciudad Cultural de San Salvador de Jujuy, abierto diariamente de 10:00 a 22:00 hs.";
-      } else if (lower.includes("accesibilidad") || lower.includes("silla") || lower.includes("reducida") || lower.includes("rampa")) {
-        botReply = "El predio Ciudad Cultural cuenta con total accesibilidad: rampas homologadas en todos los pabellones, sanitarios adaptados, señalética podotáctil e intérpretes de LSA en los paneles magistrales.";
-      } else if (lower.includes("entrada") || lower.includes("ticket") || lower.includes("precio") || lower.includes("costo")) {
-        botReply = "Las entradas pueden comprarse anticipadas con descuento y código QR rápido desde este portal, o en las boleterías del predio durante los días del evento.";
+        botReply =
+          "ExpoJuy 2026 se realizará del 12 al 15 de Octubre de 2026 en el Predio Ferial Ciudad Cultural de San Salvador de Jujuy, de 10:00 a 22:00 hs.";
+      } else if (lower.includes("entrada") || lower.includes("ticket") || lower.includes("precio") || lower.includes("comprar")) {
+        botReply =
+          "Podés adquirir tus entradas generales ($4.000 ARS) o Pases Conferencia ($35.000 ARS) directamente en la sección 'Entradas y Acreditaciones' con código QR instantáneo.";
       }
 
       setMessages((prev) => [...prev, { role: "assistant", text: botReply }]);
       setIsTyping(false);
-    }, 600);
+    }, 500);
   };
 
   return (
-    <section id="asistente-ia" className="py-24 relative bg-slate-900/40 border-t border-slate-800/80">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/70 border border-cyan-500/30 text-cyan-400 text-xs font-semibold tracking-wide uppercase mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-            Innovación en Experiencia de Usuario
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Asistente Virtual ExpoJuy (AI)
-          </h2>
-          <p className="mt-3 text-slate-400 text-sm sm:text-base">
-            Consultá en lenguaje natural sobre conferencias, stands, accesibilidad y actividades del evento.
-          </p>
-        </div>
+    <>
+      {/* Botón Flotante Fijo Abajo a la Derecha (Idéntico a la maqueta Stitch) */}
+      <div className="fixed bottom-6 right-6 z-50">
+        {!isOpen && (
+          <button
+            onClick={() => setIsOpen(true)}
+            className="flex items-center gap-2.5 bg-[#8b3d9e] hover:bg-[#722d83] text-white px-5 py-3 rounded-full shadow-xl shadow-purple-900/30 hover:scale-105 transition-all font-bold text-sm"
+          >
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2ec4b6] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-[#2ec4b6]"></span>
+            </span>
+            <Bot className="w-5 h-5 text-[#70f8e8]" />
+            <span>Asistente Virtual IA</span>
+          </button>
+        )}
+      </div>
 
-        <div className="bg-slate-900/90 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl backdrop-blur-xl">
+      {/* Ventana de Chat Flotante Desplegable */}
+      {isOpen && (
+        <div className="fixed bottom-6 right-6 z-50 w-[90vw] sm:w-[380px] h-[520px] bg-white rounded-3xl shadow-2xl border border-purple-100 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
           {/* Header del Chatbot */}
-          <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
+          <div className="bg-gradient-to-r from-[#1d1128] via-[#3a154c] to-[#006a62] p-4 text-white flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center text-slate-950 font-bold shadow-lg shadow-cyan-500/20">
-                <Bot className="w-5 h-5 text-slate-950" />
+              <div className="w-10 h-10 rounded-full bg-[#2ec4b6]/20 border border-[#2ec4b6]/40 flex items-center justify-center">
+                <Bot className="w-6 h-6 text-[#70f8e8]" />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-white flex items-center gap-1.5">
-                  JuyBot • Asistente Inteligente
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <h3 className="font-bold text-sm flex items-center gap-1.5">
+                  JuyBot IA <Sparkles className="w-3.5 h-3.5 text-[#2ec4b6]" />
                 </h3>
-                <p className="text-xs text-slate-400">Entrenado con la guía técnica oficial de ExpoJuy 2026</p>
+                <p className="text-[11px] text-purple-200">Asistente Oficial ExpoJuy 2026</p>
               </div>
             </div>
-            <span className="text-[11px] text-cyan-400 bg-cyan-950/60 border border-cyan-500/30 px-2.5 py-1 rounded-full hidden sm:inline-block">
-              IA Interactiva
-            </span>
+            <button
+              onClick={() => setIsOpen(false)}
+              aria-label="Cerrar asistente virtual"
+              className="text-white/80 hover:text-white p-1.5 rounded-full hover:bg-white/10 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
           </div>
 
-          {/* Área de Mensajes */}
-          <div className="h-80 overflow-y-auto space-y-4 pr-2 mb-4 scrollbar-thin scrollbar-thumb-slate-800">
-            {messages.map((msg, index) => (
+          {/* Historial de Mensajes */}
+          <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-[#faf8f7] text-xs">
+            {messages.map((msg, idx) => (
               <div
-                key={index}
-                className={`flex gap-3 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                key={idx}
+                className={`flex gap-2.5 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 {msg.role === "assistant" && (
-                  <div className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0 text-cyan-400">
+                  <div className="w-7 h-7 rounded-full bg-[#8b3d9e] text-white flex items-center justify-center shrink-0">
                     <Bot className="w-4 h-4" />
                   </div>
                 )}
-
                 <div
-                  className={`max-w-[85%] sm:max-w-[75%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                  className={`p-3 rounded-2xl max-w-[80%] leading-relaxed ${
                     msg.role === "user"
-                      ? "bg-cyan-500 text-slate-950 font-medium rounded-tr-none shadow-md"
-                      : "bg-slate-950/80 text-slate-200 border border-slate-800 rounded-tl-none font-light"
+                      ? "bg-[#8b3d9e] text-white rounded-br-none"
+                      : "bg-white text-slate-800 border border-slate-200 shadow-sm rounded-bl-none"
                   }`}
                 >
                   {msg.text}
                 </div>
-
                 {msg.role === "user" && (
-                  <div className="w-8 h-8 rounded-full bg-cyan-600 flex items-center justify-center shrink-0 text-slate-950">
+                  <div className="w-7 h-7 rounded-full bg-teal-600 text-white flex items-center justify-center shrink-0">
                     <User className="w-4 h-4" />
                   </div>
                 )}
@@ -123,63 +133,47 @@ export function AiAssistantSection() {
             ))}
 
             {isTyping && (
-              <div className="flex gap-3 items-center text-slate-400 text-xs">
-                <div className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0 text-cyan-400">
-                  <Bot className="w-4 h-4" />
-                </div>
-                <div className="flex items-center gap-1.5 bg-slate-950/80 px-4 py-2.5 rounded-2xl border border-slate-800">
-                  <Loader2 className="w-3.5 h-3.5 animate-spin text-cyan-400" />
-                  <span>JuyBot está consultando la guía...</span>
-                </div>
+              <div className="flex items-center gap-2 text-slate-500 italic">
+                <Bot className="w-4 h-4 text-[#8b3d9e]" />
+                <span>JuyBot está escribiendo...</span>
               </div>
             )}
           </div>
 
-          {/* Consultas Sugeridas Rápidas */}
-          <div className="mb-4">
-            <p className="text-[11px] text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1">
-              <HelpCircle className="w-3 h-3 text-cyan-400" />
-              Consultas Frecuentes Sugeridas:
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {PRESET_QUERIES.map((query, i) => (
-                <button
-                  key={i}
-                  onClick={() => handleSend(query)}
-                  className="text-xs bg-slate-950 hover:bg-slate-800 border border-slate-800 hover:border-cyan-500/40 text-slate-300 hover:text-cyan-300 px-3 py-1.5 rounded-full transition-all text-left"
-                >
-                  {query}
-                </button>
-              ))}
-            </div>
+          {/* Sugerencias rápidas */}
+          <div className="px-3 py-2 bg-white border-t border-slate-100 flex items-center gap-1.5 overflow-x-auto text-[11px] no-scrollbar">
+            <HelpCircle className="w-3.5 h-3.5 text-purple-600 shrink-0" />
+            {PRESET_QUERIES.map((query, i) => (
+              <button
+                key={i}
+                onClick={() => handleSend(query)}
+                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-purple-50 text-[#8b3d9e] border border-purple-100 hover:bg-purple-100 transition-colors shrink-0 font-medium"
+              >
+                {query}
+              </button>
+            ))}
           </div>
 
-          {/* Formulario de Input */}
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSend();
-            }}
-            className="flex gap-2"
-          >
+          {/* Input de Mensaje */}
+          <div className="p-3 bg-white border-t border-slate-200 flex items-center gap-2">
             <input
               type="text"
-              placeholder="Preguntale a JuyBot sobre actividades, stands, accesibilidad..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="flex-1 px-4 py-3 rounded-xl bg-slate-950 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"
+              onKeyDown={(e) => e.key === "Enter" && handleSend()}
+              placeholder="Escribe tu consulta aquí..."
+              className="flex-1 px-3.5 py-2 rounded-full border border-slate-200 text-xs focus:outline-none focus:border-[#8b3d9e]"
             />
             <button
-              type="submit"
-              disabled={!input.trim()}
-              aria-label="Enviar mensaje"
-              className="px-5 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 disabled:opacity-50 text-slate-950 font-bold transition-all flex items-center justify-center shadow-lg shadow-cyan-500/20"
+              onClick={() => handleSend()}
+              aria-label="Enviar mensaje al asistente"
+              className="w-9 h-9 rounded-full bg-[#006a62] hover:bg-[#00514a] text-white flex items-center justify-center shrink-0 transition-colors shadow-md"
             >
               <Send className="w-4 h-4" />
             </button>
-          </form>
+          </div>
         </div>
-      </div>
-    </section>
+      )}
+    </>
   );
 }

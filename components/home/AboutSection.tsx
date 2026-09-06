@@ -131,23 +131,19 @@ export function AboutSection() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div className="flex flex-col items-center">
               <span className="text-4xl sm:text-5xl font-extrabold text-[#70f8e8] leading-none">+300</span>
-              <span className="text-sm font-semibold mt-2">Expositores Activos</span>
-              <span className="text-xs text-white/80">Empresas e Instituciones</span>
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-wider mt-2">Expositores Confirmados</span>
             </div>
             <div className="flex flex-col items-center">
               <span className="text-4xl sm:text-5xl font-extrabold text-[#fdd6ff] leading-none">+100k</span>
-              <span className="text-sm font-semibold mt-2">Visitantes Estimados</span>
-              <span className="text-xs text-white/80">Profesionales y público</span>
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-wider mt-2">Visitantes Esperados</span>
             </div>
             <div className="flex flex-col items-center">
               <span className="text-4xl sm:text-5xl font-extrabold text-[#70f8e8] leading-none">10</span>
-              <span className="text-xs sm:text-sm font-semibold mt-2">Días de Evento</span>
-              <span className="text-xs text-white/80">Jornadas ininterrumpidas</span>
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-wider mt-2">Países Participantes</span>
             </div>
             <div className="flex flex-col items-center">
               <span className="text-4xl sm:text-5xl font-extrabold text-[#fdd6ff] leading-none">+15</span>
-              <span className="text-sm font-semibold mt-2">Rubros Económicos</span>
-              <span className="text-xs text-white/80">Cadenas productivas</span>
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-wider mt-2">Sectores Productivos</span>
             </div>
           </div>
         </div>
