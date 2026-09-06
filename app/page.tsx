@@ -13,20 +13,22 @@ import { Footer } from "@/components/home/Footer";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-[#fcf9f8] text-slate-900 selection:bg-[#2ec4b6] selection:text-slate-950">
+    <div className="flex min-h-screen flex-col bg-background font-body-md text-body-md text-on-background relative">
       <Navbar />
-      <main className="flex-1">
-        <Hero />
-        <AboutSection />
-        <ExhibitorsDirectory />
-        <ScheduleSection />
-        <VenueMapSection />
-        <NewsSection />
-        <SponsorsSection />
-        <TicketsSection />
-        <AiAssistantSection />
-        <ContactAndFaqSection />
+      <main className="w-full pt-20 bg-background flex-1">
+        <div className="flex flex-col w-full">
+          <Hero />
+          <AboutSection />
+          <ExhibitorsDirectory />
+          <ScheduleSection />
+          <VenueMapSection />
+          <NewsSection />
+          <SponsorsSection />
+          <TicketsSection />
+          <ContactAndFaqSection />
+        </div>
       </main>
+      <AiAssistantSection />
       <Footer />
     </div>
   );
