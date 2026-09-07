@@ -49,7 +49,7 @@ export function HeroSection() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-turquoise opacity-75" />
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-turquoise" />
             </span>
-            25 Sep — 4 Oct 2026 · San Salvador de Jujuy
+            9 — 12 Oct 2026 · San Salvador de Jujuy
           </span>
         </motion.div>
 

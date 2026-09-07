@@ -5,8 +5,8 @@
 export const EVENT = {
   name: "ExpoJuy 2026",
   slogan: "Conectando Países — Creando Oportunidades",
-  startDate: "2026-09-25T10:00:00-03:00",
-  endDate: "2026-10-04T20:00:00-03:00",
+  startDate: "2026-10-09T10:00:00-03:00",
+  endDate: "2026-10-12T20:00:00-03:00",
   venue: "Predio Ferial Ciudad Cultural",
   address: "Av. Teherán s/n, Ciudad Cultural, San Salvador de Jujuy",
   province: "Jujuy, Argentina",
@@ -14,8 +14,8 @@ export const EVENT = {
   pressEmail: "prensa@expojuy.com.ar",
   phone: "+54 388 422-1000",
   whatsapp: "+54 388 400-2026",
-  daysLabel: "25 de septiembre — 4 de octubre",
-  schedule: "Lun a Vie 14 a 22 hs · Sáb y Dom 11 a 22 hs",
+  daysLabel: "9 al 12 de octubre",
+  schedule: "Vie a Lun de 10 a 22 hs",
 } as const;
 
 export const SOCIALS = [
@@ -207,8 +207,8 @@ export type Activity = {
 export const AGENDA: { day: string; date: string; label: string; activities: Activity[] }[] = [
   {
     day: "day1",
-    date: "2026-09-25",
-    label: "Vie 25 · Apertura",
+    date: "2026-10-09",
+    label: "Vie 9 · Apertura",
     activities: [
       { time: "10:00 - 11:30", title: "Acto de Apertura Oficial", description: "Corte de cintas con autoridades nacionales, provinciales y delegaciones internacionales. Recorrida protocolar por los pabellones.", location: "Escenario Principal", speaker: { name: "Gobierno de Jujuy & CCEJ", role: "Comité Organizador", initials: "GJ", color: "#7B2D8E" }, tags: ["Protocolo"] },
       { time: "12:00 - 13:30", title: "El Litio y el Futuro del NOA", description: "Panel sobre la cadena de valor del litio, inversión extranjera y sostenibilidad hídrica en Salinas Grandes y Olaroz.", location: "Auditorio Principal", speaker: { name: "Dra. Mariana Colque", role: "Secretaría de Minería de Jujuy", initials: "MC", color: "#7B2D8E" }, tags: ["Minería", "Litio", "Inversión"] },
@@ -219,8 +219,8 @@ export const AGENDA: { day: string; date: string; label: string; activities: Act
   },
   {
     day: "day2",
-    date: "2026-09-26",
-    label: "Sáb 26 · Negocios",
+    date: "2026-10-10",
+    label: "Sáb 10 · Negocios",
     activities: [
       { time: "09:30 - 11:00", title: "Ronda Internacional de Negocios (Turno 1)", description: "Más de 400 reuniones B2B programadas con compradores de Bolivia, Chile, Perú, Brasil, Uruguay y México.", location: "Sala de Negocios", speaker: { name: "CCEJ · ProChile · BolivIA", role: "Agencias de comercio", initials: "CI", color: "#29ABE2" }, tags: ["B2B", "Exporta"] },
       { time: "11:30 - 12:30", title: "Agroindustria 4.0", description: "Drones, sensores IoT y trazabilidad blockchain aplicados a tabaco, legumbres y ganadería de altura.", location: "Espacio Tech", speaker: { name: "Lic. Valeria Sosa", role: "AgTech Lead · DataAndes", initials: "VS", color: "#2EC4B6" }, tags: ["Agro", "IA", "Trazabilidad"] },
@@ -232,35 +232,24 @@ export const AGENDA: { day: string; date: string; label: string; activities: Act
   },
   {
     day: "day3",
-    date: "2026-09-27",
-    label: "Dom 27 · Familia",
+    date: "2026-10-11",
+    label: "Dom 11 · Familia",
     activities: [
       { time: "11:00 - 12:00", title: "ExpoKids: Ciencia y Juego", description: "Laboratorio interactivo de ciencia, robótica educativa y realidad virtual para toda la familia.", location: "Espacio Tech", speaker: { name: "Equipo EXPOKids", role: "Divulgación científica", initials: "EK", color: "#29ABE2" }, tags: ["Familia", "Educación"] },
       { time: "12:30 - 13:30", title: "Mujeres que Lideran la Producción", description: "Historias de empresarias, mineras y productoras del NOA que transforman sus comunidades.", location: "Auditorio Principal", speaker: { name: "Panel de empresarias", role: "Red de Mujeres del NOA", initials: "MN", color: "#C4A1D4" }, tags: ["Liderazgo"] },
       { time: "14:00 - 15:00", title: "Demo Day de Startups del NOA", description: "Pitch final del concurso de startups: premios en efectivo, mentorías y acceso a fondos de inversión.", location: "Espacio Tech", speaker: { name: "Jury PyME Global", role: "Fondos de inversión", initials: "SD", color: "#2EC4B6" }, tags: ["Emprendedores", "IA"] },
       { time: "16:00 - 17:00", title: "Concurso Regional de Cocina", description: "Chefs del NOA compiten con ingredientes autóctonos: quinua, chala, charqui y frutos de altura.", location: "Escenario Principal", speaker: { name: "Chef María Ayala", role: "Jurado internacional", initials: "MA", color: "#F4A259" }, tags: ["Gastronomía"] },
-      { time: "18:30 - 20:00", title: "Gran Fiesta de la Integración", description: "Cierre de la primera etapa con música en vivo, fuegos artificiales y anuncios de ExpoJuy 2027.", location: "Escenario Principal", speaker: { name: "Artistas internacionales", role: "Bolivia · Chile · Perú", initials: "FI", color: "#7B2D8E" }, tags: ["Show", "Cultura"] },
+      { time: "18:30 - 20:00", title: "Gran Fiesta de la Integración", description: "Música en vivo, fuegos artificiales y artistas internacionales de Bolivia, Chile y Perú.", location: "Escenario Principal", speaker: { name: "Artistas internacionales", role: "Bolivia · Chile · Perú", initials: "FI", color: "#7B2D8E" }, tags: ["Show", "Cultura"] },
     ],
   },
   {
     day: "day4",
-    date: "2026-10-02",
-    label: "Vie 02 · Conocimiento",
+    date: "2026-10-12",
+    label: "Lun 12 · Cierre",
     activities: [
       { time: "10:00 - 11:00", title: "Universidad y Empresa: Puente de Innovación", description: "Transferencia tecnológica, prácticas profesionales y Becas 2027 de la Universidad Nacional de Jujuy.", location: "Auditorio Principal", speaker: { name: "Rdo. UnJu + Empresas", role: "Vinculación tecnológica", initials: "UJ", color: "#29ABE2" }, tags: ["Educación", "Innovación"] },
-      { time: "11:30 - 12:30", title: "Cómo Exportar: Guía Práctica PyME", description: "Taller paso a paso: aduanas, INCOTERMS, certificaciones SENASA y primeros pasos en marketplaces globales.", location: "Sala de Negocios", speaker: { name: "Cdor. Hugo Bautista", role: "Despachante de Aduana", initials: "HB", color: "#2A1745" }, tags: ["Comercio Exterior", "Capacitación"] },
-      { time: "14:00 - 15:30", title: "Ciberseguridad para Empresas", description: "Amenazas reales 2026 y cómo proteger la PyME: ransomware, phishing y respuesta a incidentes.", location: "Espacio Tech", speaker: { name: "Ing. Sofía Vargas", role: "Cluster IT Jujuy", initials: "SV", color: "#2EC4B6" }, tags: ["Tecnología", "Seguridad"] },
-      { time: "16:00 - 17:00", title: "Financiamiento Verde e Inversión de Impacto", description: "Bonos verdes, fondos de impacto y líneas verdes del BID para proyectos productivos del NOA.", location: "Sala de Negocios", speaker: { name: "Eco. Paula Mendieta", role: "BID Invest", initials: "PM", color: "#2EC4B6" }, tags: ["Finanzas", "Sustentabilidad"] },
-    ],
-  },
-  {
-    day: "day5",
-    date: "2026-10-03",
-    label: "Sáb 03 · Futuro",
-    activities: [
-      { time: "10:30 - 11:30", title: "Ciudades Inteligentes del Norte", description: "Paneles sobre smart cities aplicadas a San Salvador de Jujuy: movilidad, datos abiertos y participación.", location: "Espacio Tech", speaker: { name: "Arq. Fernán Ortiz", role: "Consultor ONU-Hábitat", initials: "FO", color: "#29ABE2" }, tags: ["Tecnología", "Sustentabilidad"] },
-      { time: "12:00 - 13:00", title: "Cierre de Rondas de Negocios (Turno 2)", description: "Última jornada de reuniones B2B programadas. Informe de intención de negocio y firma de acuerdos.", location: "Sala de Negocios", speaker: { name: "CCEJ", role: "Equipo de negocios", initials: "CC", color: "#2A1745" }, tags: ["B2B", "Negocios"] },
-      { time: "14:30 - 15:30", title: "La Minería que Queremos", description: "Diálogo abierto con comunidades, empresas y estado sobre minería responsable y desarrollo local.", location: "Auditorio Principal", speaker: { name: "Mesa multinivel", role: "Estado · Empresa · Comunidad", initials: "MM", color: "#7B2D8E" }, tags: ["Minería", "Debate"] },
+      { time: "11:30 - 12:30", title: "Cierre de Rondas de Negocios", description: "Última jornada de reuniones B2B programadas. Informe de intención de negocio y firma de acuerdos.", location: "Sala de Negocios", speaker: { name: "CCEJ", role: "Equipo de negocios", initials: "CC", color: "#2A1745" }, tags: ["B2B", "Negocios"] },
+      { time: "14:00 - 15:30", title: "La Minería que Queremos", description: "Diálogo abierto con comunidades, empresas y estado sobre minería responsable y desarrollo local.", location: "Auditorio Principal", speaker: { name: "Mesa multinivel", role: "Estado · Empresa · Comunidad", initials: "MM", color: "#7B2D8E" }, tags: ["Minería", "Debate"] },
       { time: "17:00 - 18:00", title: "Anuncio de Resultados y Premios ExpoJuy", description: "Mejor stand, innovación aplicada y sustentabilidad. Premiación del concurso de emprendedores.", location: "Escenario Principal", speaker: { name: "Comité Organizador", role: "CCEJ", initials: "CO", color: "#C4A1D4" }, tags: ["Ceremonia"] },
       { time: "19:00 - 22:00", title: "Gran Cierre Musical", description: "El cierre más grande del norte: banda invitada de nivel nacional y show de luces y drones sobre el predio.", location: "Escenario Principal", speaker: { name: "Banda invitada", role: "Banda sorpresa 🎉", initials: "GC", color: "#7B2D8E" }, tags: ["Show", "Cierre"] },
     ],
@@ -429,7 +418,7 @@ export const SPONSOR_TIERS = [
 export const FAQS = [
   {
     q: "¿Cuándo y dónde se realiza ExpoJuy 2026?",
-    a: "Del 25 de septiembre al 4 de octubre de 2026 en el Predio Ferial Ciudad Cultural (Av. Teherán s/n, San Salvador de Jujuy). Horarios: lunes a viernes de 14 a 22 hs; sábados y domingos de 11 a 22 hs.",
+    a: "Del 9 al 12 de octubre de 2026 en el Predio Ferial Ciudad Cultural (Av. Teherán s/n, San Salvador de Jujuy). Horarios: de 10 a 22 hs.",
   },
   {
     q: "¿Cómo puedo inscribirme como expositor?",
@@ -449,7 +438,7 @@ export const FAQS = [
   },
   {
     q: "¿Cuál es el reglamento para montaje de stands?",
-    a: "El montaje se realiza del 20 al 24 de septiembre. El manual del expositor (enviado al confirmar participación) detalla alturas máximas, materiales ignífugos, normativa eléctrica y horarios permitidos. Todo stand requiere aprobación técnica previa.",
+    a: "El montaje se realiza del 5 al 8 de octubre. El manual del expositor (enviado al confirmar participación) detalla alturas máximas, materiales ignífugos, normativa eléctrica y horarios permitidos. Todo stand requiere aprobación técnica previa.",
   },
   {
     q: "¿Cómo me acredito como prensa?",

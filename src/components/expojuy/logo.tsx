@@ -1,59 +1,90 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export function ExpoJuyLogo({
   className,
-  variant = "dark",
+  variant = "auto",
 }: {
   className?: string;
-  variant?: "dark" | "light";
+  variant?: "dark" | "light" | "auto";
+}) {
+  const whiteLogo = "/images/expojuy26_horizontal-white.png";
+  const darkLogo = "/images/expojuy26_horizontal-dark2.png";
+
+  return (
+    <span className={cn("inline-flex items-center select-none", className)}>
+      {/* Logo White: Para modo claro según el requerimiento, o explícitamente variant light */}
+      <Image
+        src={whiteLogo}
+        alt="Logo ExpoJuy 2026"
+        width={140}
+        height={60}
+        className={cn(
+          "w-32 h-auto object-contain transition-transform duration-300 hover:scale-105",
+          variant === "light" && "block drop-shadow-[0_2px_8px_rgba(46,196,182,0.35)]",
+          variant === "dark" && "hidden",
+          variant === "auto" && "block dark:hidden"
+        )}
+        priority
+      />
+      {/* Logo Dark2: Para modo oscuro, o explícitamente variant dark */}
+      <Image
+        src={darkLogo}
+        alt="Logo ExpoJuy 2026"
+        width={140}
+        height={60}
+        className={cn(
+          "w-32 h-auto object-contain transition-transform duration-300 hover:scale-105",
+          variant === "dark" && "block",
+          variant === "light" && "hidden",
+          variant === "auto" && "hidden dark:block"
+        )}
+        priority
+      />
+    </span>
+  );
+}
+
+/** Logo compacto solo el isologotipo (para favicon-style o badges) */
+export function ExpoJuyIcon({
+  className,
+  size = 40,
+}: {
+  className?: string;
+  size?: number;
 }) {
   return (
-    <span className={cn("inline-flex items-center gap-2.5 select-none", className)}>
-      {/* Isologotipo EJ */}
-      <svg
-        viewBox="0 0 64 64"
-        className="h-10 w-10 shrink-0 drop-shadow-sm"
-        role="img"
-        aria-label="Isologotipo ExpoJuy 2026"
-      >
-        <defs>
-          <linearGradient id="ej-g1" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#2EC4B6" />
-            <stop offset="100%" stopColor="#29ABE2" />
-          </linearGradient>
-          <linearGradient id="ej-g2" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#C4A1D4" />
-            <stop offset="100%" stopColor="#7B2D8E" />
-          </linearGradient>
-        </defs>
-        <rect width="64" height="64" rx="14" fill="#2A1745" />
-        <path d="M14 18h16v6H21v5h8v6h-8v5h9v6H14z" fill="url(#ej-g1)" />
-        <path
-          d="M34 18h7l6 10 6-10h7L49 32l11 14h-7l-6-9.5L41 46h-7l11-14z"
-          fill="url(#ej-g2)"
-        />
-        <rect x="10" y="52" width="44" height="4" rx="2" fill="#2EC4B6" />
-      </svg>
-      <span className="flex flex-col leading-none">
-        <span
-          className={cn(
-            "font-display text-xl font-extrabold tracking-tight",
-            variant === "dark" ? "text-ink" : "text-white"
-          )}
-        >
-          Expo<span className="text-gradient">Juy</span>{" "}
-          <span className="text-turquoise">2026</span>
-        </span>
-        <span
-          className={cn(
-            "mt-1 text-[9px] font-semibold uppercase tracking-[0.18em]",
-            variant === "dark" ? "text-violet-ink/70" : "text-lavender"
-          )}
-        >
-          Conectando Países
-        </span>
-      </span>
-    </span>
+    <Image
+      src="/images/expojuy-isologotipo.png"
+      alt="ExpoJuy 2026"
+      width={size}
+      height={size}
+      className={cn("object-contain drop-shadow-sm", className)}
+    />
+  );
+}
+
+/** Logo grande vertical con slogan (para hero / about) */
+export function ExpoJuyFullLogo({
+  className,
+  maxWidth = 360,
+}: {
+  className?: string;
+  maxWidth?: number;
+}) {
+  return (
+    <Image
+      src="/images/expojuy-vertical.png"
+      alt="ExpoJuy 2026 — Conectando Países, Creando Oportunidades"
+      width={maxWidth}
+      height={Math.round(maxWidth * 0.75)}
+      className={cn(
+        "w-full object-contain drop-shadow-lg",
+        className
+      )}
+      style={{ maxWidth }}
+      priority
+    />
   );
 }
 
@@ -62,22 +93,17 @@ export function CamaraLogo({ className, light = false }: { className?: string; l
     <span className={cn("inline-flex items-center gap-3", className)}>
       <span
         className={cn(
-          "relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 bg-[#ffffff] shadow-sm",
+          "relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 bg-white shadow-sm overflow-hidden transition-transform duration-300 hover:scale-105",
           light ? "border-turquoise/60" : "border-violet-brand/30"
         )}
       >
-        <svg viewBox="0 0 40 40" className="h-9 w-9" aria-hidden="true">
-          <circle cx="20" cy="20" r="17" fill="none" stroke="#7B2D8E" strokeWidth="2" strokeDasharray="4 3" />
-          <path
-            d="M11 24l5-5 4 3 8-8"
-            fill="none"
-            stroke="#2EC4B6"
-            strokeWidth="2.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <circle cx="28" cy="14" r="2.4" fill="#C4A1D4" />
-        </svg>
+        <Image
+          src="/images/logo-camcomext.png"
+          alt="Cámara de Comercio Exterior de Jujuy"
+          width={48}
+          height={48}
+          className="h-10 w-10 object-contain"
+        />
       </span>
       <span className="flex flex-col leading-tight">
         <span className={cn("font-display text-sm font-bold", light ? "text-white" : "text-ink")}>

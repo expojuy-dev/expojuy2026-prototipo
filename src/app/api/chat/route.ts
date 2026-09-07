@@ -23,7 +23,7 @@ Comercio Exterior de Jujuy.
 
 DATOS OFICIALES DEL EVENTO:
 - Slogan: "${EVENT.slogan}"
-- Fechas: del 25 de septiembre al 4 de octubre de 2026 (${EVENT.daysLabel}).
+- Fechas: del 9 al 12 de octubre de 2026 (${EVENT.daysLabel}).
 - Lugar: ${EVENT.venue}, ${EVENT.address}.
 - Horarios: ${EVENT.schedule}.
 - Contacto: ${EVENT.email} · ${EVENT.phone}

@@ -11,7 +11,13 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu, Ticket, Store, MapPin, CalendarDays, Search } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Menu, Ticket, Store, MapPin, CalendarDays, Search, ChevronDown, Globe } from "lucide-react";
 import { ExpoJuyLogo } from "./logo";
 import { SOCIALS, EVENT } from "@/lib/data";
 import { openSearchPalette } from "./search-palette";
@@ -33,24 +39,45 @@ const SOCIAL_ICONS: Record<string, React.ElementType> = {
   youtube: Youtube,
 };
 
-const NAV_LINKS = [
-  { href: "#inicio", label: "Inicio", shortLabel: null },
+/* Links principales visibles en la barra */
+const PRIMARY_NAV = [
   { href: "#sobre", label: "Sobre ExpoJuy", shortLabel: "Sobre" },
   { href: "#expositores", label: "Expositores", shortLabel: "Expositores" },
   { href: "#agenda", label: "Agenda", shortLabel: "Agenda" },
   { href: "#mapa", label: "Mapa del Predio", shortLabel: "Mapa" },
+];
+
+/* Links secundarios que van dentro de "Más" */
+const MORE_NAV = [
   { href: "#noticias", label: "Noticias", shortLabel: "Noticias" },
   { href: "#sponsors", label: "Sponsors", shortLabel: "Sponsors" },
   { href: "#faq", label: "FAQ", shortLabel: "FAQ" },
   { href: "#contacto", label: "Contacto", shortLabel: "Contacto" },
 ];
 
+/* Todos los links combinados para el menú mobile */
+const NAV_LINKS = [
+  { href: "#inicio", label: "Inicio", shortLabel: null },
+  ...PRIMARY_NAV,
+  ...MORE_NAV,
+];
+
+/* Idiomas disponibles */
+const LANGUAGES = [
+  { code: "es", label: "Español", flag: "🇦🇷" },
+  { code: "en", label: "English", flag: "🇺🇸" },
+  { code: "pt", label: "Português", flag: "🇧🇷" },
+] as const;
+
 export function SiteHeader() {
   const [scrolled, setScrolled] = React.useState(false);
   const [active, setActive] = React.useState("#inicio");
   const [open, setOpen] = React.useState(false);
+  const [lang, setLang] = React.useState<string>("es");
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.4 });
+
+  const currentLang = LANGUAGES.find((l) => l.code === lang) ?? LANGUAGES[0];
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -106,19 +133,34 @@ export function SiteHeader() {
             </span>
           </div>
           <div className="flex items-center gap-3">
-            {/* Buscador global (Ctrl+K) */}
-            <button
-              type="button"
-              onClick={openSearchPalette}
-              aria-label="Abrir buscador del sitio (Ctrl+K)"
-              className="group inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 py-1 pl-2 pr-1.5 text-white/80 transition hover:border-turquoise/60 hover:text-turquoise"
-            >
-              <Search className="h-3.5 w-3.5" aria-hidden="true" />
-              <span className="hidden text-[11px] font-semibold md:inline">Buscar</span>
-              <kbd className="hidden rounded border border-white/25 bg-white/10 px-1 font-mono text-[9px] font-bold xl:inline">
-                Ctrl K
-              </kbd>
-            </button>
+            {/* Selector de idioma */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  type="button"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-2 py-1 text-[11px] font-semibold text-white/80 transition hover:border-turquoise/60 hover:text-turquoise"
+                >
+                  <Globe className="h-3.5 w-3.5" aria-hidden="true" />
+                  <span className="hidden sm:inline">{currentLang.flag} {currentLang.label}</span>
+                  <span className="sm:hidden">{currentLang.flag}</span>
+                  <ChevronDown className="h-3 w-3 opacity-60" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="min-w-[140px]">
+                {LANGUAGES.map((l) => (
+                  <DropdownMenuItem
+                    key={l.code}
+                    onClick={() => setLang(l.code)}
+                    className={cn(
+                      "cursor-pointer gap-2 text-sm font-medium",
+                      lang === l.code && "text-turquoise"
+                    )}
+                  >
+                    <span>{l.flag}</span> {l.label}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
             {/* Modo claro / oscuro */}
             <ThemeToggle />
             <div className="flex items-center gap-1" aria-label="Redes sociales">
@@ -155,15 +197,15 @@ export function SiteHeader() {
             <ExpoJuyLogo />
           </a>
 
-          {/* Links desktop (etiquetas cortas para evitar overflow del contenedor) */}
+          {/* Links desktop: primarios + dropdown "Más" */}
           <nav aria-label="Navegación principal" className="hidden min-w-0 xl:block">
             <ul className="flex items-center gap-0.5">
-              {NAV_LINKS.filter((l) => l.shortLabel !== null).map((link) => (
+              {PRIMARY_NAV.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     className={cn(
-                      "relative whitespace-nowrap rounded-full px-2 py-2 text-[12.5px] font-semibold transition-colors xl:px-2.5",
+                      "relative whitespace-nowrap rounded-full px-2.5 py-2 text-[12.5px] font-semibold transition-colors",
                       active === link.href
                         ? "text-violet-ink"
                         : "text-graphite/80 hover:text-turquoise-ink"
@@ -180,13 +222,67 @@ export function SiteHeader() {
                   </a>
                 </li>
               ))}
+              {/* Dropdown "Más" */}
+              <li>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button
+                      type="button"
+                      className={cn(
+                        "relative inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 text-[12.5px] font-semibold transition-colors",
+                        MORE_NAV.some((l) => active === l.href)
+                          ? "text-violet-ink"
+                          : "text-graphite/80 hover:text-turquoise-ink"
+                      )}
+                    >
+                      Más
+                      <ChevronDown className="h-3.5 w-3.5 opacity-60" />
+                      <span
+                        className={cn(
+                          "absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-gradient-brand transition-all duration-300",
+                          MORE_NAV.some((l) => active === l.href) ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
+                        )}
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start" className="min-w-[160px]">
+                    {MORE_NAV.map((link) => (
+                      <DropdownMenuItem key={link.href} asChild>
+                        <a
+                          href={link.href}
+                          className={cn(
+                            "cursor-pointer text-sm font-semibold",
+                            active === link.href ? "text-turquoise" : ""
+                          )}
+                        >
+                          {link.label}
+                        </a>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </li>
             </ul>
           </nav>
 
-          {/* CTAs */}
+          {/* CTAs: Buscar + Expositor + Entradas */}
           <div className="flex items-center gap-2">
             {/* Toggle de tema siempre visible en desktop (la barra superior se oculta al scrollear) */}
             <ThemeToggle variant="nav" className="hidden md:inline-flex" />
+            {/* Buscador global (Ctrl+K) — movido desde la barra superior */}
+            <button
+              type="button"
+              onClick={openSearchPalette}
+              aria-label="Abrir buscador del sitio (Ctrl+K)"
+              className="group hidden items-center gap-1.5 rounded-full border border-lavender/50 bg-transparent px-3 py-1.5 text-graphite/80 transition hover:border-turquoise/60 hover:text-turquoise-ink md:inline-flex"
+            >
+              <Search className="h-4 w-4" aria-hidden="true" />
+              <span className="text-[12px] font-semibold">Buscar</span>
+              <kbd className="hidden rounded border border-lavender/40 bg-lavender-light px-1 font-mono text-[9px] font-bold text-graphite/60 xl:inline">
+                Ctrl K
+              </kbd>
+            </button>
             <Button
               asChild
               variant="outline"
@@ -249,6 +345,27 @@ export function SiteHeader() {
                       </li>
                     ))}
                   </ul>
+                  {/* Selector de idioma en mobile */}
+                  <div className="mt-4 border-t border-lavender/30 pt-4">
+                    <p className="mb-2 px-4 text-xs font-bold uppercase tracking-wider text-graphite/60">Idioma</p>
+                    <div className="flex gap-2 px-4">
+                      {LANGUAGES.map((l) => (
+                        <button
+                          key={l.code}
+                          type="button"
+                          onClick={() => setLang(l.code)}
+                          className={cn(
+                            "flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-semibold transition",
+                            lang === l.code
+                              ? "border-turquoise bg-turquoise-light text-turquoise-ink"
+                              : "border-lavender/40 text-graphite hover:border-turquoise/50"
+                          )}
+                        >
+                          <span>{l.flag}</span> {l.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                   <div className="mt-4 flex flex-col gap-2 border-t border-lavender/30 pt-4">
                     <ThemeToggleInline className="w-full" />
                     <InstallAppSheetItem onNavigate={() => setOpen(false)} />

@@ -45,7 +45,7 @@ export function SiteFooter() {
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Columna 1: marca */}
           <div className="flex flex-col gap-5">
-            <ExpoJuyLogo variant="light" />
+            <ExpoJuyLogo variant="dark" />
             <p className="text-sm leading-relaxed text-white/65">
               La feria de producción, tecnología, innovación y comercio exterior más importante
               del Norte Argentino. Un punto de encuentro entre países, empresas y personas.
