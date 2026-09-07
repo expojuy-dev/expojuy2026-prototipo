@@ -51,9 +51,9 @@ export function Hero() {
         </div>
 
         {/* Dark Gradient Scrim Overlay for Maximum Contrast & Vibrancy */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1b1c1c]/80 via-[#7B2D8E]/60 to-[#1b1c1c]/95 backdrop-blur-[1px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_35%,rgba(46,196,182,0.2),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_65%,rgba(139,61,158,0.25),transparent_55%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0f1923]/85 via-[#7B2D8E]/55 to-[#1a2332]/95 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_35%,rgba(31,184,168,0.22),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_65%,rgba(123,45,142,0.28),transparent_55%)]" />
       </div>
 
       <div className="relative z-10 max-w-[1280px] w-full mx-auto px-gutter-mobile lg:px-gutter-desktop flex flex-col items-center text-center">
