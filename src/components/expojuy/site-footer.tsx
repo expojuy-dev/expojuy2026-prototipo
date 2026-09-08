@@ -33,11 +33,36 @@ const INSTITUTIONAL_LINKS = [
 
 export function SiteFooter() {
   return (
-    <footer className="relative mt-auto bg-deep dark:bg-[#080811] text-white" aria-label="Pie de página">
-      <div className="dots-pattern-light absolute inset-0 opacity-20" aria-hidden="true" />
+    <footer className="relative mt-auto text-white" aria-label="Pie de página">
+      {/* Waves decorativas en la parte superior del footer (Modelo 2) */}
+      <div className="relative w-full h-14 sm:h-20 -mb-px pointer-events-none overflow-hidden" aria-hidden="true">
+        <svg
+          className="w-full h-full"
+          fill="none"
+          preserveAspectRatio="none"
+          viewBox="0 0 1440 120"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0,32L60,42.7C120,53,240,75,360,74.7C480,75,600,53,720,58.7C840,64,960,96,1080,96C1200,96,1320,64,1380,48L1440,32L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"
+            className="fill-violet-600/[0.08] dark:fill-violet-600/[0.18]"
+          />
+          <path
+            d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,53.3C1120,53,1280,75,1360,85.3L1440,96L1440,120L1380,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"
+            className="fill-cyan-500/[0.12] dark:fill-cyan-500/[0.28]"
+          />
+          <path
+            d="M0,96L60,90.7C120,85,240,75,360,80C480,85,600,107,720,106.7C840,107,960,85,1080,80C1200,75,1320,85,1380,90.7L1440,96L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"
+            className="fill-deep dark:fill-[#080811]"
+          />
+        </svg>
+      </div>
 
-      {/* Newsletter */}
-      <NewsletterBand />
+      <div className="relative bg-deep dark:bg-[#080811]">
+        <div className="dots-pattern-light absolute inset-0 opacity-20" aria-hidden="true" />
+
+        {/* Newsletter */}
+        <NewsletterBand />
 
       <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -145,28 +170,20 @@ export function SiteFooter() {
           </div>
         </div>
       </div>
-
-      {/* Waves decorativas (Modelo 2) */}
-      <div className="relative w-full h-16 sm:h-24 pointer-events-none" aria-hidden="true">
-        <svg className="absolute bottom-0 w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,32L60,42.7C120,53,240,75,360,74.7C480,75,600,53,720,58.7C840,64,960,96,1080,96C1200,96,1320,64,1380,48L1440,32L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z" className="fill-violet-600/[0.06] dark:fill-violet-600/[0.15]" />
-          <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,53.3C1120,53,1280,75,1360,85.3L1440,96L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" className="fill-cyan-500/[0.08] dark:fill-cyan-500/[0.25]" />
-          <path d="M0,96L60,90.7C120,85,240,75,360,80C480,85,600,107,720,106.7C840,107,960,85,1080,80C1200,75,1320,85,1380,90.7L1440,96L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z" className="fill-white/95 dark:fill-[#04050a]/90" />
-        </svg>
       </div>
 
       {/* Línea inferior */}
-      <div className="relative border-t border-slate-100 bg-white dark:border-white/5 dark:bg-[#04050a]">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-5 text-center text-xs text-slate-500 dark:text-white/50 sm:flex-row sm:px-6 sm:text-left">
+      <div className="relative border-t border-white/10 bg-deep/95 dark:border-white/5 dark:bg-[#04050a]">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-5 text-center text-xs text-white/60 sm:flex-row sm:px-6 sm:text-left">
           <p>
             © 2026 ExpoJuy — Cámara de Comercio Exterior de Jujuy. Todos los derechos reservados.
           </p>
-          <p className="inline-flex items-center gap-1.5">
+          <p className="inline-flex items-center gap-1.5 text-white/60">
             Hecho con ❤️ en San Salvador de Jujuy
             <a
               href="#inicio"
               aria-label="Volver arriba"
-              className="ml-2 flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-slate-400 transition hover:border-cyan-400 hover:text-cyan-600 dark:border-white/15 dark:text-white/70 dark:hover:border-cyan-400 dark:hover:text-cyan-400"
+              className="ml-2 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:border-cyan-400 hover:text-cyan-400"
             >
               <ArrowUp className="h-4 w-4" aria-hidden="true" />
             </a>
