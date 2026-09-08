@@ -294,7 +294,7 @@ export function SiteHeader() {
                       />
                     </button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start" className="min-w-[340px] rounded-2xl border-lavender/40 bg-surface/95 p-3 shadow-xl backdrop-blur-md">
+                  <DropdownMenuContent align="start" className="min-w-[280px] rounded-2xl border-lavender/40 bg-surface/95 p-2 shadow-xl backdrop-blur-md">
                     <div className="mb-2 mt-1 px-3 text-[10px] font-bold uppercase tracking-wider text-graphite/60">
                       Secciones Adicionales
                     </div>
@@ -305,36 +305,36 @@ export function SiteHeader() {
                           key={link.href} 
                           asChild 
                           className={cn(
-                            "group/item cursor-pointer rounded-xl p-3 outline-none transition-colors",
+                            "group/item cursor-pointer rounded-xl p-2 outline-none transition-colors",
                             active === link.href ? "hover:bg-turquoise-ink/10 focus:bg-turquoise-ink/10" : "hover:bg-lavender-light focus:bg-lavender-light"
                           )}
                         >
                           <a
                             href={link.href}
                             className={cn(
-                              "flex items-start gap-4 rounded-xl transition-colors",
-                              active === link.href ? "bg-turquoise-ink/10 border-l-[3px] border-turquoise-ink pl-2.5" : "border-l-[3px] border-transparent pl-2.5"
+                              "flex items-start gap-3 rounded-xl transition-colors",
+                              active === link.href ? "bg-turquoise-ink/10 border-l-[3px] border-turquoise-ink pl-2" : "border-l-[3px] border-transparent pl-2"
                             )}
                           >
                             <div className={cn(
-                              "flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl transition-colors duration-300",
+                              "flex h-8 w-8 shrink-0 items-center justify-center rounded-xl transition-colors duration-300",
                               active === link.href
                                 ? "bg-turquoise-ink shadow-sm"
                                 : "bg-lavender-light group-hover/item:bg-violet-brand group-hover/item:shadow-sm"
                             )}>
                               <Icon 
                                 className={cn(
-                                  "h-5 w-5 transition-colors",
+                                  "h-4 w-4 transition-colors",
                                   active === link.href ? "text-white" : "text-violet-ink group-hover/item:text-white"
                                 )} 
                                 aria-hidden="true" 
                               />
                             </div>
                             <div className="flex flex-col gap-0.5">
-                              <span className="text-[14px] font-bold text-ink">
+                              <span className="text-[13px] font-bold text-ink">
                                 {link.label}
                               </span>
-                              <span className="text-[12px] font-medium text-graphite/70">
+                              <span className="text-[11px] font-medium leading-snug text-graphite/70">
                                 {link.description}
                               </span>
                             </div>
