@@ -41,6 +41,7 @@ const SOCIAL_ICONS: Record<string, React.ElementType> = {
 
 /* Links principales visibles en la barra */
 const PRIMARY_NAV = [
+  { href: "#inicio", label: "Inicio", shortLabel: "Inicio" },
   { href: "#sobre", label: "Sobre ExpoJuy", shortLabel: "Sobre ExpoJuy" },
   { href: "#expositores", label: "Expositores", shortLabel: "Expositores" },
   { href: "#agenda", label: "Agenda", shortLabel: "Agenda" },
@@ -246,7 +247,7 @@ export function SiteHeader() {
 
           {/* Links desktop: primarios + dropdown "Más" */}
           <nav aria-label="Navegación principal" className="hidden min-w-0 xl:block">
-            <ul className="flex items-center gap-0.5 rounded-full bg-black/5 p-1 dark:bg-white/5">
+            <ul className="flex items-center gap-0.5 rounded-full bg-black/[0.02] p-1 dark:bg-white/[0.02]">
               {PRIMARY_NAV.map((link) => (
                 <li key={link.href}>
                   <a
@@ -300,19 +301,26 @@ export function SiteHeader() {
                     {MORE_NAV.map((link) => {
                       const Icon = link.icon;
                       return (
-                        <DropdownMenuItem key={link.href} asChild className="cursor-pointer rounded-xl p-3 outline-none transition-colors hover:bg-lavender-light focus:bg-lavender-light">
+                        <DropdownMenuItem 
+                          key={link.href} 
+                          asChild 
+                          className={cn(
+                            "group/item cursor-pointer rounded-xl p-3 outline-none transition-colors",
+                            active === link.href ? "hover:bg-turquoise-ink/10 focus:bg-turquoise-ink/10" : "hover:bg-lavender-light focus:bg-lavender-light"
+                          )}
+                        >
                           <a
                             href={link.href}
                             className={cn(
-                              "flex items-start gap-4",
-                              active === link.href ? "bg-lavender-light/60" : ""
+                              "flex items-start gap-4 rounded-xl transition-colors",
+                              active === link.href ? "bg-turquoise-ink/10 border-l-[3px] border-turquoise-ink pl-2.5" : "border-l-[3px] border-transparent pl-2.5"
                             )}
                           >
                             <div className={cn(
                               "flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl transition-colors duration-300",
                               active === link.href
-                                ? "bg-violet-brand text-white shadow-sm"
-                                : "bg-lavender-light text-violet-ink"
+                                ? "bg-turquoise-ink text-white shadow-sm"
+                                : "bg-lavender-light text-violet-ink group-hover/item:bg-violet-brand group-hover/item:text-white group-hover/item:shadow-sm"
                             )}>
                               <Icon className="h-5 w-5" aria-hidden="true" />
                             </div>
