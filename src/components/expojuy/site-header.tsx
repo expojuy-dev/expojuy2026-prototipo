@@ -17,7 +17,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu, Ticket, Store, MapPin, CalendarDays, Search, ChevronDown, Globe } from "lucide-react";
+import { Menu, Ticket, Store, MapPin, CalendarDays, Search, ChevronDown } from "lucide-react";
 import { ExpoJuyLogo } from "./logo";
 import { SOCIALS, EVENT } from "@/lib/data";
 import { openSearchPalette } from "./search-palette";
@@ -62,12 +62,83 @@ const NAV_LINKS = [
   ...MORE_NAV,
 ];
 
-/* Idiomas disponibles */
-const LANGUAGES = [
-  { code: "es", label: "Español", flag: "🇦🇷" },
-  { code: "en", label: "English", flag: "🇺🇸" },
-  { code: "pt", label: "Português", flag: "🇧🇷" },
+/* Idiomas disponibles con abreviatura */
+export const LANGUAGES = [
+  { code: "es", label: "Español", short: "ES", flag: "🇦🇷" },
+  { code: "en", label: "English", short: "EN", flag: "🇺🇸" },
+  { code: "pt", label: "Português", short: "PT", flag: "🇧🇷" },
 ] as const;
+
+/**
+ * Botón circular para elegir idioma con el mismo tamaño y proporciones
+ * que el botón de modo claro/oscuro (ThemeToggle).
+ */
+export function LanguageToggle({
+  className,
+  variant = "topbar",
+  currentCode,
+  onSelect,
+}: {
+  className?: string;
+  variant?: "topbar" | "nav";
+  currentCode: string;
+  onSelect: (code: string) => void;
+}) {
+  const currentLang = LANGUAGES.find((l) => l.code === currentCode) ?? LANGUAGES[0];
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          type="button"
+          aria-label={`Cambiar idioma. Idioma seleccionado: ${currentLang.label}`}
+          title={`Idioma: ${currentLang.label}`}
+          className={cn(
+            "group relative inline-flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border text-[11px] font-extrabold tracking-tight transition-all duration-300 hover:scale-105 active:scale-95",
+            variant === "topbar"
+              ? "border-white/20 bg-surface/10 text-white/85 hover:border-turquoise/70 hover:text-turquoise"
+              : "border-lavender/60 bg-turquoise-light text-violet-ink hover:border-turquoise hover:text-turquoise-ink",
+            className
+          )}
+        >
+          <span className="select-none leading-none uppercase">{currentLang.short}</span>
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        align="end"
+        className="min-w-[145px] rounded-xl border border-lavender/40 bg-surface/95 p-1.5 shadow-xl backdrop-blur-md z-50"
+      >
+        {LANGUAGES.map((l) => (
+          <DropdownMenuItem
+            key={l.code}
+            onClick={() => onSelect(l.code)}
+            className={cn(
+              "flex cursor-pointer items-center justify-between rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors",
+              currentCode === l.code
+                ? "bg-turquoise-light text-turquoise-ink font-bold"
+                : "text-graphite hover:bg-lavender-light hover:text-ink"
+            )}
+          >
+            <span className="flex items-center gap-2">
+              <span className="text-base leading-none">{l.flag}</span>
+              <span>{l.label}</span>
+            </span>
+            <span
+              className={cn(
+                "rounded px-1 text-[10px] font-mono font-bold uppercase",
+                currentCode === l.code
+                  ? "bg-turquoise/20 text-turquoise-ink"
+                  : "text-graphite/50"
+              )}
+            >
+              {l.short}
+            </span>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = React.useState(false);
@@ -76,8 +147,6 @@ export function SiteHeader() {
   const [lang, setLang] = React.useState<string>("es");
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.4 });
-
-  const currentLang = LANGUAGES.find((l) => l.code === lang) ?? LANGUAGES[0];
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -132,35 +201,13 @@ export function SiteHeader() {
               {EVENT.address}
             </span>
           </div>
-          <div className="flex items-center gap-3">
-            {/* Selector de idioma */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-2 py-1 text-[11px] font-semibold text-white/80 transition hover:border-turquoise/60 hover:text-turquoise"
-                >
-                  <Globe className="h-3.5 w-3.5" aria-hidden="true" />
-                  <span className="hidden sm:inline">{currentLang.flag} {currentLang.label}</span>
-                  <span className="sm:hidden">{currentLang.flag}</span>
-                  <ChevronDown className="h-3 w-3 opacity-60" />
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="min-w-[140px]">
-                {LANGUAGES.map((l) => (
-                  <DropdownMenuItem
-                    key={l.code}
-                    onClick={() => setLang(l.code)}
-                    className={cn(
-                      "cursor-pointer gap-2 text-sm font-medium",
-                      lang === l.code && "text-turquoise"
-                    )}
-                  >
-                    <span>{l.flag}</span> {l.label}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+          <div className="flex items-center gap-2">
+            {/* Selector de idioma circular */}
+            <LanguageToggle
+              variant="topbar"
+              currentCode={lang}
+              onSelect={setLang}
+            />
             {/* Modo claro / oscuro */}
             <ThemeToggle />
             <div className="flex items-center gap-1" aria-label="Redes sociales">
@@ -268,6 +315,13 @@ export function SiteHeader() {
 
           {/* CTAs: Buscar + Expositor + Entradas */}
           <div className="flex items-center gap-2">
+            {/* Selector de idioma circular visible en desktop */}
+            <LanguageToggle
+              variant="nav"
+              className="hidden md:inline-flex"
+              currentCode={lang}
+              onSelect={setLang}
+            />
             {/* Toggle de tema siempre visible en desktop (la barra superior se oculta al scrollear) */}
             <ThemeToggle variant="nav" className="hidden md:inline-flex" />
             {/* Buscador global (Ctrl+K) — movido desde la barra superior */}
@@ -348,20 +402,24 @@ export function SiteHeader() {
                   {/* Selector de idioma en mobile */}
                   <div className="mt-4 border-t border-lavender/30 pt-4">
                     <p className="mb-2 px-4 text-xs font-bold uppercase tracking-wider text-graphite/60">Idioma</p>
-                    <div className="flex gap-2 px-4">
+                    <div className="flex flex-wrap gap-2 px-4">
                       {LANGUAGES.map((l) => (
                         <button
                           key={l.code}
                           type="button"
                           onClick={() => setLang(l.code)}
                           className={cn(
-                            "flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-semibold transition",
+                            "flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold transition",
                             lang === l.code
-                              ? "border-turquoise bg-turquoise-light text-turquoise-ink"
+                              ? "border-turquoise bg-turquoise-light text-turquoise-ink font-bold shadow-sm"
                               : "border-lavender/40 text-graphite hover:border-turquoise/50"
                           )}
                         >
-                          <span>{l.flag}</span> {l.label}
+                          <span className="text-base leading-none">{l.flag}</span>
+                          <span>{l.label}</span>
+                          <span className="rounded bg-black/5 px-1 py-0.5 font-mono text-[10px] font-bold uppercase dark:bg-white/10">
+                            {l.short}
+                          </span>
                         </button>
                       ))}
                     </div>
