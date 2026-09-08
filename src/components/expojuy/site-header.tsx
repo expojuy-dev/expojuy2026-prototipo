@@ -95,10 +95,10 @@ export function LanguageToggle({
           aria-label={`Cambiar idioma. Idioma seleccionado: ${currentLang.label}`}
           title={`Idioma: ${currentLang.label}`}
           className={cn(
-            "group relative inline-flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border text-[11px] font-extrabold tracking-tight transition-all duration-300 hover:scale-105 active:scale-95",
+            "group relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full border font-extrabold tracking-tight transition-all duration-300 hover:scale-105 active:scale-95",
             variant === "topbar"
-              ? "border-white/20 bg-surface/10 text-white/85 hover:border-turquoise/70 hover:text-turquoise"
-              : "border-lavender/60 bg-turquoise-light text-violet-ink hover:border-turquoise hover:text-turquoise-ink",
+              ? "h-7 w-7 text-[9px] border-white/20 bg-surface/10 text-white/85 hover:border-turquoise/70 hover:text-turquoise"
+              : "h-9 w-9 text-[11px] border-lavender/60 bg-turquoise-light text-violet-ink hover:border-turquoise hover:text-turquoise-ink",
             className
           )}
         >
@@ -203,14 +203,6 @@ export function SiteHeader() {
             </span>
           </div>
           <div className="flex items-center gap-2">
-            {/* Selector de idioma circular */}
-            <LanguageToggle
-              variant="topbar"
-              currentCode={lang}
-              onSelect={setLang}
-            />
-            {/* Modo claro / oscuro */}
-            <ThemeToggle />
             <div className="flex items-center gap-1" aria-label="Redes sociales">
             {SOCIALS.map((s) => {
               const Icon = SOCIAL_ICONS[s.icon];
@@ -227,6 +219,16 @@ export function SiteHeader() {
                 </a>
               );
             })}
+            </div>
+            <div className="ml-2 flex items-center gap-2 border-l border-white/10 pl-3">
+              {/* Selector de idioma circular */}
+              <LanguageToggle
+                variant="topbar"
+                currentCode={lang}
+                onSelect={setLang}
+              />
+              {/* Modo claro / oscuro */}
+              <ThemeToggle />
             </div>
           </div>
         </div>

@@ -40,12 +40,12 @@ export function ThemeToggle({
       aria-pressed={isDark}
       title={isDark ? "Modo claro" : "Modo oscuro"}
       className={cn(
-        "group relative inline-flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border transition-all duration-300 hover:scale-105 active:scale-95",
+        "group relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full border transition-all duration-300 hover:scale-105 active:scale-95",
         variant === "topbar"
           ? // Sobre la barra superior oscura
-            "border-white/20 bg-surface/10 text-white/85 hover:border-turquoise/70 hover:text-turquoise"
+            "h-7 w-7 border-white/20 bg-surface/10 text-white/85 hover:border-turquoise/70 hover:text-turquoise"
           : // En la nav principal (fondo surface, se adapta claro/oscuro)
-            "border-lavender/60 bg-turquoise-light text-violet-ink hover:border-turquoise hover:text-turquoise-ink",
+            "h-9 w-9 border-lavender/60 bg-turquoise-light text-violet-ink hover:border-turquoise hover:text-turquoise-ink",
         className
       )}
     >
