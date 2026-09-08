@@ -17,7 +17,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu, Ticket, Store, MapPin, CalendarDays, Search, ChevronDown } from "lucide-react";
+import { Menu, Ticket, Store, MapPin, CalendarDays, Search, ChevronDown, Newspaper, Award, HelpCircle, Mail } from "lucide-react";
 import { ExpoJuyLogo } from "./logo";
 import { SOCIALS, EVENT } from "@/lib/data";
 import { openSearchPalette } from "./search-palette";
@@ -41,18 +41,18 @@ const SOCIAL_ICONS: Record<string, React.ElementType> = {
 
 /* Links principales visibles en la barra */
 const PRIMARY_NAV = [
-  { href: "#sobre", label: "Sobre ExpoJuy", shortLabel: "Sobre" },
+  { href: "#sobre", label: "Sobre ExpoJuy", shortLabel: "Sobre ExpoJuy" },
   { href: "#expositores", label: "Expositores", shortLabel: "Expositores" },
   { href: "#agenda", label: "Agenda", shortLabel: "Agenda" },
-  { href: "#mapa", label: "Mapa del Predio", shortLabel: "Mapa" },
 ];
 
 /* Links secundarios que van dentro de "Más" */
 const MORE_NAV = [
-  { href: "#noticias", label: "Noticias", shortLabel: "Noticias" },
-  { href: "#sponsors", label: "Sponsors", shortLabel: "Sponsors" },
-  { href: "#faq", label: "FAQ", shortLabel: "FAQ" },
-  { href: "#contacto", label: "Contacto", shortLabel: "Contacto" },
+  { href: "#mapa", label: "Mapa del Predio", shortLabel: "Mapa", description: "Ubicación de stands y pabellones", icon: MapPin },
+  { href: "#noticias", label: "Noticias", shortLabel: "Noticias", description: "Novedades y comunicados oficiales", icon: Newspaper },
+  { href: "#sponsors", label: "Sponsors", shortLabel: "Sponsors", description: "Empresas e instituciones aliadas", icon: Award },
+  { href: "#faq", label: "Preguntas Frecuentes", shortLabel: "FAQ", description: "Horarios, accesos e información útil", icon: HelpCircle },
+  { href: "#contacto", label: "Contacto", shortLabel: "Contacto", description: "Mesa de ayuda y prensa", icon: Mail },
 ];
 
 /* Todos los links combinados para el menú mobile */
@@ -235,8 +235,8 @@ export function SiteHeader() {
       <div
         className={cn(
           "bg-surface/90 backdrop-blur-lg transition-shadow duration-300",
-          scrolled ? "shadow-[0_6px_24px_-8px_rgba(42,23,69,0.18)]" : "shadow-none",
-          "border-b border-lavender/30"
+          scrolled ? "shadow-[0_6px_24px_-8px_rgba(42,23,69,0.18)]" : "shadow-[0_1px_2px_rgba(0,0,0,0.02)]",
+          "border-b border-black/5 dark:border-white/10"
         )}
       >
         <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
@@ -246,7 +246,7 @@ export function SiteHeader() {
 
           {/* Links desktop: primarios + dropdown "Más" */}
           <nav aria-label="Navegación principal" className="hidden min-w-0 xl:block">
-            <ul className="flex items-center gap-0.5">
+            <ul className="flex items-center gap-0.5 rounded-full bg-black/5 p-1 dark:bg-white/5">
               {PRIMARY_NAV.map((link) => (
                 <li key={link.href}>
                   <a
@@ -293,20 +293,41 @@ export function SiteHeader() {
                       />
                     </button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start" className="min-w-[160px]">
-                    {MORE_NAV.map((link) => (
-                      <DropdownMenuItem key={link.href} asChild>
-                        <a
-                          href={link.href}
-                          className={cn(
-                            "cursor-pointer text-sm font-semibold",
-                            active === link.href ? "text-turquoise" : ""
-                          )}
-                        >
-                          {link.label}
-                        </a>
-                      </DropdownMenuItem>
-                    ))}
+                  <DropdownMenuContent align="start" className="min-w-[340px] rounded-2xl border-lavender/40 bg-surface/95 p-3 shadow-xl backdrop-blur-md">
+                    <div className="mb-2 mt-1 px-3 text-[10px] font-bold uppercase tracking-wider text-graphite/60">
+                      Secciones Adicionales
+                    </div>
+                    {MORE_NAV.map((link) => {
+                      const Icon = link.icon;
+                      return (
+                        <DropdownMenuItem key={link.href} asChild className="cursor-pointer rounded-xl p-3 outline-none transition-colors hover:bg-lavender-light focus:bg-lavender-light">
+                          <a
+                            href={link.href}
+                            className={cn(
+                              "flex items-start gap-4",
+                              active === link.href ? "bg-lavender-light/60" : ""
+                            )}
+                          >
+                            <div className={cn(
+                              "flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl transition-colors duration-300",
+                              active === link.href
+                                ? "bg-violet-brand text-white shadow-sm"
+                                : "bg-lavender-light text-violet-ink"
+                            )}>
+                              <Icon className="h-5 w-5" aria-hidden="true" />
+                            </div>
+                            <div className="flex flex-col gap-0.5">
+                              <span className={cn("text-[14px] font-bold", active === link.href ? "text-violet-ink" : "text-ink")}>
+                                {link.label}
+                              </span>
+                              <span className="text-[12px] font-medium text-graphite/70">
+                                {link.description}
+                              </span>
+                            </div>
+                          </a>
+                        </DropdownMenuItem>
+                      );
+                    })}
                   </DropdownMenuContent>
                 </DropdownMenu>
               </li>
