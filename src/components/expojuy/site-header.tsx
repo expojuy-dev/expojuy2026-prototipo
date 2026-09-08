@@ -97,7 +97,7 @@ export function LanguageToggle({
           className={cn(
             "group relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full border font-extrabold tracking-tight transition-all duration-300 hover:scale-105 active:scale-95",
             variant === "topbar"
-              ? "h-7 w-7 text-[9px] border-white/20 bg-surface/10 text-white/85 hover:border-turquoise/70 hover:text-turquoise"
+              ? "h-7 w-7 text-[9px] border-slate-200 bg-slate-50 text-slate-500 hover:text-cyan-600 hover:border-cyan-300 dark:border-white/20 dark:bg-white/5 dark:text-white/85 dark:hover:border-cyan-400 dark:hover:text-cyan-400"
               : "h-9 w-9 text-[11px] border-lavender/60 bg-turquoise-light text-violet-ink hover:border-turquoise hover:text-turquoise-ink",
             className
           )}
@@ -187,19 +187,19 @@ export function SiteHeader() {
       {/* Barra superior fina */}
       <div
         className={cn(
-          "bg-deep text-white transition-all duration-300 overflow-hidden",
+          "border-b border-slate-100 bg-slate-50/90 backdrop-blur-md text-slate-600 dark:bg-[#0b0c1b]/80 dark:border-white/5 dark:text-white transition-all duration-300 overflow-hidden",
           scrolled ? "h-0 opacity-0" : "h-9 opacity-100"
         )}
       >
         <div className="mx-auto flex h-9 max-w-7xl items-center justify-between gap-4 px-4 text-[11px] sm:px-6">
           <div className="flex items-center gap-3 sm:gap-4 truncate">
-            <span className="inline-flex items-center gap-1.5 text-lavender" title={`${EVENT.daysLabel}, 2026`}>
-              <CalendarDays className="h-3.5 w-3.5 shrink-0 text-turquoise" aria-hidden="true" />
+            <span className="inline-flex items-center gap-1.5 text-cyan-600 font-semibold dark:text-cyan-400 dark:font-medium" title={`${EVENT.daysLabel}, 2026`}>
+              <CalendarDays className="h-3.5 w-3.5 shrink-0 text-cyan-600 dark:text-turquoise" aria-hidden="true" />
               <span className="hidden min-[360px]:inline min-[480px]:hidden">9 a 12</span>
               <span className="hidden min-[480px]:inline">{EVENT.daysLabel}, 2026</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 text-lavender" title={EVENT.address}>
-              <MapPin className="h-3.5 w-3.5 shrink-0 text-turquoise" aria-hidden="true" />
+            <span className="inline-flex items-center gap-1.5 text-slate-600 dark:text-slate-400" title={EVENT.address}>
+              <MapPin className="h-3.5 w-3.5 shrink-0 text-violet-600 dark:text-violet-400" aria-hidden="true" />
               <span className="hidden sm:inline md:hidden">Av. Teherán s/n</span>
               <span className="hidden md:inline truncate">{EVENT.address}</span>
             </span>
@@ -215,14 +215,14 @@ export function SiteHeader() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="rounded-full p-1.5 text-white/70 transition hover:bg-white/10 hover:text-turquoise"
+                  className="rounded-full p-1.5 text-slate-500 transition hover:text-cyan-600 dark:text-white/70 dark:hover:bg-white/10 dark:hover:text-cyan-400"
                 >
                   <Icon className="h-3.5 w-3.5" aria-hidden="true" />
                 </a>
               );
             })}
             </div>
-            <div className="ml-2 flex items-center gap-2 border-l border-white/10 pl-3">
+            <div className="ml-2 flex items-center gap-2 border-l border-slate-200 dark:border-white/10 pl-3">
               {/* Selector de idioma circular */}
               <LanguageToggle
                 variant="topbar"
@@ -239,9 +239,9 @@ export function SiteHeader() {
       {/* Navegación principal */}
       <div
         className={cn(
-          "bg-surface/90 backdrop-blur-lg transition-shadow duration-300",
-          scrolled ? "shadow-[0_6px_24px_-8px_rgba(42,23,69,0.18)]" : "shadow-[0_1px_2px_rgba(0,0,0,0.02)]",
-          "border-b border-black/5 dark:border-white/10"
+          "bg-white/90 backdrop-blur-xl transition-shadow duration-300",
+          "dark:bg-[#080811]/90 dark:backdrop-blur-xl",
+          scrolled ? "shadow-sm dark:shadow-[0_6px_24px_-8px_rgba(0,0,0,0.4)]" : "shadow-none"
         )}
       >
         <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
@@ -251,16 +251,16 @@ export function SiteHeader() {
 
           {/* Links desktop: primarios + dropdown "Más" */}
           <nav aria-label="Navegación principal" className="hidden min-w-0 xl:block">
-            <ul className="flex items-center gap-0.5 rounded-full bg-black/[0.02] p-1 dark:bg-white/[0.02]">
+            <ul className="flex items-center gap-0.5 rounded-full bg-slate-50 p-1.5 border border-slate-200/70 shadow-inner dark:bg-[#121324]/60 dark:border-white/5 dark:shadow-none">
               {PRIMARY_NAV.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     className={cn(
-                      "relative whitespace-nowrap rounded-full px-2.5 py-2 text-[12.5px] font-semibold transition-colors",
+                      "relative whitespace-nowrap rounded-full px-4 py-2 text-sm transition-all duration-200",
                       active === link.href
-                        ? "text-violet-ink"
-                        : "text-graphite/80 hover:text-turquoise-ink"
+                        ? "font-semibold text-slate-900 bg-white shadow-sm border border-slate-100 dark:text-white dark:bg-white/10 dark:border-transparent dark:shadow-sm"
+                        : "font-medium text-slate-600 hover:text-cyan-600 hover:bg-white/60 dark:text-slate-300 dark:hover:text-cyan-300 dark:hover:bg-white/5"
                     )}
                   >
                     {link.shortLabel}
@@ -281,10 +281,10 @@ export function SiteHeader() {
                     <button
                       type="button"
                       className={cn(
-                        "relative inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 text-[12.5px] font-semibold transition-colors",
+                        "relative inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-sm transition-all duration-200",
                         MORE_NAV.some((l) => active === l.href)
-                          ? "text-violet-ink"
-                          : "text-graphite/80 hover:text-turquoise-ink"
+                          ? "font-semibold text-slate-900 bg-white shadow-sm border border-slate-100 dark:text-white dark:bg-white/10 dark:border-transparent dark:shadow-sm"
+                          : "font-medium text-slate-600 hover:text-cyan-600 hover:bg-white/60 dark:text-slate-300 dark:hover:text-cyan-300 dark:hover:bg-white/5"
                       )}
                     >
                       Más
@@ -355,7 +355,7 @@ export function SiteHeader() {
                   type="button"
                   onClick={openSearchPalette}
                   aria-label="Abrir buscador del sitio (Ctrl+K)"
-                  className="flex h-8 w-8 items-center justify-center rounded-full text-graphite/80 transition-colors hover:bg-black/5 hover:text-turquoise-ink dark:text-white/80 dark:hover:bg-white/10"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-50 border border-slate-200 text-slate-600 hover:text-cyan-600 hover:border-cyan-400 shadow-sm transition-all duration-200 dark:bg-white/5 dark:border-white/10 dark:text-slate-300 dark:hover:text-cyan-400 dark:hover:border-cyan-400/40"
                 >
                   <Search className="h-4 w-4" aria-hidden="true" />
                 </button>
@@ -369,7 +369,7 @@ export function SiteHeader() {
             <Button
               asChild
               variant="outline"
-              className="hidden whitespace-nowrap rounded-full border-2 border-violet-brand bg-transparent px-4 font-bold text-violet-ink transition hover:bg-violet-brand hover:text-white hover:shadow-lg hover:shadow-violet-brand/25 md:inline-flex md:flex"
+              className="hidden whitespace-nowrap rounded-full border-2 border-violet-brand bg-transparent px-4 font-bold text-violet-ink transition hover:bg-violet-brand hover:text-white hover:shadow-lg hover:shadow-violet-brand/25 dark:border-white/15 dark:text-slate-200 dark:bg-white/5 dark:hover:bg-white/10 dark:hover:border-violet-400/50 dark:hover:text-white md:inline-flex md:flex"
             >
               <a href="#contacto">
                 <Store className="h-4 w-4" aria-hidden="true" />
@@ -378,7 +378,7 @@ export function SiteHeader() {
             </Button>
             <Button
               asChild
-              className="bg-gradient-brand hidden whitespace-nowrap rounded-full px-4 font-bold text-white shadow-md shadow-turquoise/30 transition hover:shadow-xl hover:shadow-turquoise/40 hover:brightness-105 sm:inline-flex sm:flex"
+              className="bg-gradient-m2-cta hidden whitespace-nowrap rounded-full px-5 py-2.5 font-bold text-xs uppercase tracking-wider text-white shadow-md shadow-violet-600/25 hover:shadow-cyan-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 sm:inline-flex sm:flex"
             >
               <a href="#entradas">
                 <Ticket className="h-4 w-4" aria-hidden="true" />
@@ -393,7 +393,7 @@ export function SiteHeader() {
                   variant="outline"
                   size="icon"
                   aria-label="Abrir menú"
-                  className="rounded-full border-lavender/60 text-ink xl:hidden"
+                  className="rounded-xl border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10 xl:hidden"
                 >
                   <Menu className="h-5 w-5" aria-hidden="true" />
                 </Button>
@@ -504,8 +504,8 @@ export function SiteHeader() {
             </Sheet>
           </div>
         </div>
-        {/* Línea arcoíris sutil al pie del header */}
-        <div className="rainbow-line h-[3px] w-full opacity-80" aria-hidden="true" />
+        {/* Divisor sutil para versión clara; ausente en versión oscura */}
+        <div className="h-px w-full bg-slate-200/80 dark:hidden" aria-hidden="true" />
       </div>
     </header>
   );

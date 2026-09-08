@@ -47,9 +47,32 @@ export function AboutSection() {
   return (
     <section
       id="sobre"
-      className="relative overflow-hidden bg-lavender-light/60 py-20 sm:py-24"
+      className="relative bg-lavender-light/60 py-20 sm:py-24"
       aria-label="Sobre ExpoJuy 2026"
     >
+      {/* Waves decorativas montadas exactamente sobre el límite superior de la sección (mismo patrón que el footer) */}
+      <div className="absolute bottom-full left-0 right-0 w-full h-16 sm:h-24 pointer-events-none overflow-hidden bg-transparent" aria-hidden="true">
+        <svg
+          className="absolute bottom-0 w-full h-full"
+          fill="none"
+          preserveAspectRatio="none"
+          viewBox="0 0 1440 120"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0,32L60,42.7C120,53,240,75,360,74.7C480,75,600,53,720,58.7C840,64,960,96,1080,96C1200,96,1320,64,1380,48L1440,32L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"
+            className="fill-violet-600/[0.06] dark:fill-violet-600/[0.20]"
+          />
+          <path
+            d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,53.3C1120,53,1280,75,1360,85.3L1440,96L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"
+            className="fill-cyan-500/[0.08] dark:fill-cyan-500/[0.30]"
+          />
+          <path
+            d="M0,96L60,90.7C120,85,240,75,360,80C480,85,600,107,720,106.7C840,107,960,85,1080,80C1200,75,1320,85,1380,90.7L1440,96L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"
+            className="fill-[#F9F6FB] dark:fill-[#0d0a1e]"
+          />
+        </svg>
+      </div>
       <div className="dots-pattern pointer-events-none absolute inset-0 opacity-50" aria-hidden="true" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading

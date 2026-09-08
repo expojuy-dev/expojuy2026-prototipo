@@ -2,9 +2,8 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Ticket, Store, ChevronDown, MapPin, CalendarDays } from "lucide-react";
-import { EVENT } from "@/lib/data";
-import { Countdown } from "./countdown";
+import { Store, MapPin, Play, ArrowRight } from "lucide-react";
+import { ExpoJuyIcon } from "./logo";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 26 },
@@ -19,147 +18,181 @@ export function HeroSection() {
   return (
     <section
       id="inicio"
-      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-deep"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-gradient-to-b from-white via-slate-50 to-white dark:bg-[#080811] dark:from-[#080811] dark:via-[#080811] dark:to-[#080811]"
       aria-label="ExpoJuy 2026 — Inicio"
     >
-      {/* Fondo */}
-      <div className="absolute inset-0" aria-hidden="true">
+      {/* ── Full-bleed background image ── */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
         <img
           src="/images/hero-feria.png"
           alt=""
-          className="h-full w-full scale-105 object-cover"
+          className="h-full w-full object-cover object-center opacity-70 brightness-110 dark:opacity-100 dark:brightness-90 dark:contrast-105"
           loading="eager"
-          fetchPriority="high"
         />
-        {/* Overlay degradado violeta oscuro → transparente */}
-        <div className="absolute inset-0 bg-gradient-to-b from-deep/95 via-deep/75 to-deep/95" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(123,45,142,0.35),transparent_65%)]" />
-        <div className="dots-pattern-light absolute inset-0 opacity-40" />
+        {/* Light mode overlays */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 via-50% to-transparent dark:from-[#080811] dark:via-[#080811]/90 dark:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent dark:from-[#080811] dark:via-transparent dark:to-[#080811]/70" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(124,58,237,0.06),transparent_60%)] dark:bg-gradient-to-tr dark:from-violet-950/40 dark:via-transparent dark:to-cyan-950/30" />
       </div>
 
-      {/* Halos decorativos */}
-      <div className="pointer-events-none absolute -left-32 top-1/4 h-80 w-80 rounded-full bg-turquoise/25 blur-[110px]" aria-hidden="true" />
-      <div className="pointer-events-none absolute -right-24 bottom-1/4 h-96 w-96 rounded-full bg-violet-brand/40 blur-[120px]" aria-hidden="true" />
+      {/* ── Ambient glow spheres (dark mode only) ── */}
+      <div className="ambient-sphere-violet absolute -top-24 left-[10%] hidden dark:block" aria-hidden="true" />
+      <div className="ambient-sphere-cyan absolute top-1/4 right-[5%] hidden dark:block" aria-hidden="true" />
 
-      {/* Contenido */}
-      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center px-4 pb-24 pt-36 text-center sm:px-6">
-        <motion.div variants={fadeUp} initial="hidden" animate="show" custom={0.1}>
-          <span className="glass inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-bold uppercase tracking-[0.18em] text-turquoise sm:text-sm">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-turquoise opacity-75" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-turquoise" />
+      {/* ── Main content container ── */}
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col lg:flex-row items-center justify-between gap-12 px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+
+        {/* ── LEFT COLUMN: Content & Editorial Typography ── */}
+        <motion.div
+          initial="hidden"
+          animate="show"
+          className="w-full lg:max-w-2xl flex flex-col justify-center text-left space-y-7"
+        >
+          {/* Badge with venue & date */}
+          <motion.div variants={fadeUp} custom={0.1} className="inline-flex items-center gap-3 flex-wrap">
+            <span className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-bold tracking-wider uppercase text-cyan-700 bg-cyan-50/90 border border-cyan-200/80 shadow-sm dark:py-1 dark:font-semibold dark:text-cyan-300 dark:bg-cyan-950/60 dark:border-cyan-500/30 dark:backdrop-blur-md dark:shadow-none">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-500 dark:bg-cyan-400 opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-500 dark:bg-cyan-400" />
+              </span>
+              9 — 12 OCT 2026
             </span>
-            9 — 12 Oct 2026 · San Salvador de Jujuy
-          </span>
+            <span className="text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+              • SAN SALVADOR DE JUJUY
+            </span>
+          </motion.div>
+
+          {/* Main Headline */}
+          <motion.div variants={fadeUp} custom={0.25} className="space-y-3">
+            <h1 className="text-5xl sm:text-7xl xl:text-8xl font-black tracking-tight leading-none text-slate-900 dark:text-white">
+              Expo<span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-500 dark:from-cyan-400 dark:via-cyan-300 dark:to-violet-400">Juy</span>{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-violet-600 dark:from-violet-400 dark:via-purple-300 dark:to-cyan-400 font-extrabold text-4xl sm:text-6xl xl:text-7xl ml-1 inline-block">
+                2026
+              </span>
+            </h1>
+            <p className="text-xl sm:text-2xl xl:text-3xl font-bold tracking-tight text-slate-800 dark:text-slate-100 flex flex-wrap items-center gap-x-2">
+              <span className="text-slate-900 dark:text-slate-100">Conectando Países.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-indigo-600 to-violet-600 dark:from-cyan-300 dark:via-cyan-400 dark:to-violet-400 font-extrabold">
+                Creando Oportunidades.
+              </span>
+            </p>
+          </motion.div>
+
+          {/* Description paragraph */}
+          <motion.p
+            variants={fadeUp}
+            custom={0.4}
+            className="text-base sm:text-lg text-slate-600 dark:text-slate-300 font-normal leading-relaxed max-w-xl"
+          >
+            La feria de producción, tecnología, innovación y comercio exterior
+            más importante del Norte Argentino. Un punto de encuentro
+            estratégico para la integración regional y global en{" "}
+            <span className="text-slate-900 dark:text-white font-semibold underline decoration-cyan-400 dark:decoration-cyan-400/60 underline-offset-4">
+              San Salvador de Jujuy
+            </span>.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div variants={fadeUp} custom={0.55} className="flex flex-wrap items-center gap-4 pt-1">
+            <Button
+              asChild
+              size="lg"
+              className="bg-gradient-m2-cta h-14 rounded-full px-7 font-bold text-sm tracking-wide text-white shadow-xl shadow-cyan-500/20 hover:shadow-cyan-400/35 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 group"
+            >
+              <a href="#entradas">
+                <span>Comprar Entradas</span>
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+              </a>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="h-14 rounded-full px-6 font-semibold text-sm text-slate-800 bg-white hover:bg-slate-50 border border-slate-200 hover:border-violet-400 hover:text-violet-700 shadow-sm dark:text-slate-200 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/15 dark:hover:border-violet-400/50 dark:hover:text-white transition-all duration-200 dark:backdrop-blur-md"
+            >
+              <a href="#contacto">
+                <Store className="h-4 w-4 text-violet-600 dark:text-violet-400" aria-hidden="true" />
+                <span>Quiero ser Expositor</span>
+              </a>
+            </Button>
+          </motion.div>
+
+          {/* Key Metrics Grid */}
+          <motion.div
+            variants={fadeUp}
+            custom={0.7}
+            className="pt-8 border-t border-slate-200 dark:border-white/10 grid grid-cols-3 gap-4 max-w-lg"
+          >
+            <div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">4 Días</div>
+              <p className="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 mt-0.5">Acceso Total</p>
+            </div>
+            <div className="border-l border-slate-200 dark:border-white/10 pl-4">
+              <div className="text-2xl sm:text-3xl font-extrabold text-cyan-600 dark:text-cyan-400 tracking-tight">350+</div>
+              <p className="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 mt-0.5">Expositores</p>
+            </div>
+            <div className="border-l border-slate-200 dark:border-white/10 pl-4">
+              <div className="text-2xl sm:text-3xl font-extrabold text-violet-600 dark:text-violet-400 tracking-tight">50K+</div>
+              <p className="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 mt-0.5">Visitantes</p>
+            </div>
+          </motion.div>
         </motion.div>
 
-        <motion.h1
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={0.25}
-          className="font-display mt-6 text-6xl font-black leading-none tracking-tight text-white drop-shadow-xl sm:text-8xl lg:text-[8.5rem]"
-        >
-          Expo<span className="text-gradient-soft">Juy</span>
-          <span className="ml-3 inline-block bg-gradient-brand rounded-2xl px-3 pb-1.5 pt-0.5 text-[0.55em] align-middle shadow-xl shadow-turquoise/25 sm:ml-5 sm:px-4">
-            2026
-          </span>
-        </motion.h1>
-
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={0.4}
-          className="font-display mt-5 text-xl font-bold tracking-wide text-lavender sm:text-2xl lg:text-3xl"
-        >
-          Conectando Países <span className="text-turquoise">—</span> Creando Oportunidades
-        </motion.p>
-
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={0.52}
-          className="mt-4 max-w-2xl text-sm leading-relaxed text-white/80 sm:text-base lg:text-lg"
-        >
-          La feria de producción, tecnología, innovación y comercio exterior más importante
-          del Norte Argentino. <strong className="text-white">San Salvador de Jujuy.</strong>
-        </motion.p>
-
-        {/* Countdown */}
-        <div className="mt-9 w-full">
-          <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.25em] text-white/60">
-            El evento comienza en
-          </p>
-          <Countdown />
-        </div>
-
-        {/* CTAs */}
+        {/* ── RIGHT COLUMN: Floating Interactive Highlights ── */}
         <motion.div
-          variants={fadeUp}
           initial="hidden"
           animate="show"
-          custom={1.35}
-          className="mt-10 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row"
+          className="w-full lg:w-auto flex flex-col items-start lg:items-end gap-5 lg:self-end pb-4"
         >
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="h-14 w-full rounded-full border-2 border-lavender bg-white/5 px-8 text-base font-bold text-white backdrop-blur transition hover:border-white hover:bg-white hover:text-violet-brand hover:shadow-2xl sm:w-auto"
+          {/* Location Badge (dark only — on light the image fades too much) */}
+          <motion.div
+            variants={fadeUp}
+            custom={0.8}
+            className="hidden dark:inline-flex glass-card-dark rounded-full px-4 py-2 items-center gap-2 text-xs font-semibold text-white shadow-xl backdrop-blur-md"
           >
-            <a href="#contacto">
-              <Store className="h-5 w-5" aria-hidden="true" />
-              Quiero ser Expositor
-            </a>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            className="bg-gradient-brand btn-shine h-14 w-full rounded-full px-8 text-base font-bold text-white shadow-xl shadow-violet-brand/40 transition hover:scale-[1.03] hover:shadow-2xl hover:brightness-110 active:scale-95 sm:w-auto"
-          >
-            <a href="#entradas">
-              <Ticket className="h-5 w-5" aria-hidden="true" />
-              Comprar Entradas
-            </a>
-          </Button>
-        </motion.div>
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
+            </span>
+            <MapPin className="h-3.5 w-3.5 text-violet-400" aria-hidden="true" />
+            Ciudad Cultural, Jujuy
+          </motion.div>
 
-        {/* Info rápida */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={1.5}
-          className="mt-9 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-white/65 sm:text-sm"
-        >
-          <span className="inline-flex items-center gap-1.5">
-            <MapPin className="h-4 w-4 text-turquoise" aria-hidden="true" />
-            {EVENT.venue}
-          </span>
-          <span className="hidden h-1 w-1 rounded-full bg-white/40 sm:block" aria-hidden="true" />
-          <span className="inline-flex items-center gap-1.5">
-            <CalendarDays className="h-4 w-4 text-turquoise" aria-hidden="true" />
-            {EVENT.schedule}
-          </span>
+          {/* Floating Virtual Tour Card */}
+          <motion.div
+            variants={fadeUp}
+            custom={0.95}
+            className="rounded-2xl p-4 sm:p-5 shadow-xl border flex items-center justify-between gap-4 group transition-all duration-300 w-full sm:w-80 backdrop-blur-xl border-slate-100 bg-white/95 hover:border-cyan-400 dark:glass-card-dark dark:glass-card-dark-hover dark:shadow-2xl dark:border-white/20 dark:hover:border-cyan-400/50 dark:bg-[#0b0c1b]/80"
+          >
+            {/* Thumbnail */}
+            <div className="relative w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-violet-100 border border-violet-200/60 dark:bg-violet-950 dark:border-white/10">
+              <ExpoJuyIcon size={56} className="w-full h-full p-1.5" />
+              <div className="absolute inset-0 bg-violet-600/10 dark:bg-violet-900/30" />
+            </div>
+            {/* Info */}
+            <div className="flex-1 min-w-0 pr-1">
+              <p className="text-[11px] font-bold text-cyan-600 dark:text-cyan-300 dark:font-semibold tracking-wide uppercase">
+                Recorrido Virtual
+              </p>
+              <p className="text-xs font-bold text-slate-900 dark:text-white truncate group-hover:text-cyan-600 dark:group-hover:text-cyan-200 transition-colors">
+                Conocé la Expo 2026
+              </p>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 block">
+                Pabellón Central 360°
+              </span>
+            </div>
+            {/* Play button */}
+            <button
+              type="button"
+              aria-label="Ver video tour"
+              className="w-10 h-10 rounded-full flex items-center justify-center shadow-md transition-all duration-200 shrink-0 bg-violet-600 text-white group-hover:bg-cyan-500 group-hover:scale-110 active:scale-95 dark:bg-white dark:text-violet-950 dark:group-hover:bg-cyan-400 dark:group-hover:text-black dark:shadow-lg"
+            >
+              <Play className="h-4 w-4 ml-0.5" fill="currentColor" aria-hidden="true" />
+            </button>
+          </motion.div>
         </motion.div>
       </div>
 
-      {/* Scroll down */}
-      <motion.a
-        href="#sobre"
-        aria-label="Desplazarse hacia abajo"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 rounded-full p-2 text-white/70 transition hover:text-turquoise"
-      >
-        <span className="flex flex-col items-center gap-1">
-          <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Scroll</span>
-          <ChevronDown className="animate-bounce-soft h-6 w-6" aria-hidden="true" />
-        </span>
-      </motion.a>
     </section>
   );
 }
