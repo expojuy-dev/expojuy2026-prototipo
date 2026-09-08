@@ -1,0 +1,81 @@
+// Prisma schema — ExpoJuy 2026
+// Portal híbrido B2B/B2C: leads comerciales, ticketing con QR y newsletter.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Captación de prospectos (Lead Generation) — formulario de contacto
+model Lead {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String?
+  company     String?
+  industry    String? // Rubro (si es expositor)
+  spaceSize   String? // Tamaño de espacio requerido
+  inquiryType String // "expositor" | "general" | "prensa" | "sponsoreo" | "otro"
+  message     String
+  status      String   @default("nuevo") // nuevo | contactado | calificado | cerrado
+  createdAt   DateTime @default(now())
+}
+
+// Ticketing / acreditación con QR
+model Ticket {
+  id        String   @id @default(cuid())
+  code      String   @unique // código único impreso en el QR
+  type      String // "visitante" | "prensa" | "b2b"
+  holder    String
+  email     String
+  days      String   @default("1") // cantidad de días
+  price     Int      @default(0) // en ARS, 0 = gratuita
+  used      Boolean  @default(false)
+  usedAt    DateTime? // momento del check-in en puerta
+  createdAt DateTime @default(now())
+}
+
+// Suscripción a novedades (newsletter B2C)
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+// Solicitud de reunión B2B con un expositor (ronda de negocios)
+model MeetingRequest {
+  id            String   @id @default(cuid())
+  exhibitorId   String // id del expositor (src/lib/data.ts)
+  exhibitorName String
+  name          String
+  email         String
+  company       String?
+  message       String
+  preferredSlot String // franja horaria preferida: "2026-09-25 10:00-12:00" etc.
+  status        String   @default("pendiente") // pendiente | confirmada | rechazada
+  createdAt     DateTime @default(now())
+}
+
+// Auditoría de accesos: quién escaneó cada entrada y cuándo
+model CheckinLog {
+  id        String   @id @default(cuid())
+  code      String // código de la entrada escaneada
+  holder    String // nombre del titular al momento del escaneo
+  action    String // "checkin" | "revert"
+  operator  String   @default("Puerta 1") // operador que escaneó
+  source    String   @default("manual") // "manual" | "camara"
+  createdAt DateTime @default(now())
+}
+
+// Encuesta pública "Votá tu stand favorito" — 1 voto por dispositivo (puede cambiarlo)
+model StandVote {
+  id          String   @id @default(cuid())
+  exhibitorId String // id del expositor votado (src/lib/data.ts)
+  deviceId    String  @unique // identificador anónimo del navegador (localStorage)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

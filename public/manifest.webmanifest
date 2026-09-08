@@ -1,0 +1,61 @@
+{
+  "name": "ExpoJuy 2026 — Conectando Países, Creando Oportunidades",
+  "short_name": "ExpoJuy 2026",
+  "description": "La feria de producción, tecnología, innovación y comercio exterior más importante del Norte Argentino. 9 al 12 de octubre de 2026, San Salvador de Jujuy.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2A1745",
+  "theme_color": "#2EC4B6",
+  "lang": "es-AR",
+  "orientation": "portrait-primary",
+  "categories": ["business", "events", "shopping"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Comprar entradas",
+      "url": "/#entradas",
+      "description": "Conseguí tu entrada para ExpoJuy 2026"
+    },
+    {
+      "name": "Agenda del evento",
+      "url": "/#agenda",
+      "description": "Conferencias, rondas y talleres día por día"
+    },
+    {
+      "name": "Directorio de expositores",
+      "url": "/#expositores",
+      "description": "Las empresas que exponen en ExpoJuy 2026"
+    }
+  ]
+}
