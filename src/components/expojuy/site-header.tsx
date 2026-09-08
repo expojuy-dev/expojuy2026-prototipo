@@ -319,13 +319,19 @@ export function SiteHeader() {
                             <div className={cn(
                               "flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl transition-colors duration-300",
                               active === link.href
-                                ? "bg-turquoise-ink text-white shadow-sm"
-                                : "bg-lavender-light text-violet-ink group-hover/item:bg-violet-brand group-hover/item:text-white group-hover/item:shadow-sm"
+                                ? "bg-turquoise-ink shadow-sm"
+                                : "bg-lavender-light group-hover/item:bg-violet-brand group-hover/item:shadow-sm"
                             )}>
-                              <Icon className="h-5 w-5" aria-hidden="true" />
+                              <Icon 
+                                className={cn(
+                                  "h-5 w-5 transition-colors",
+                                  active === link.href ? "text-white" : "text-violet-ink group-hover/item:text-white"
+                                )} 
+                                aria-hidden="true" 
+                              />
                             </div>
                             <div className="flex flex-col gap-0.5">
-                              <span className={cn("text-[14px] font-bold", active === link.href ? "text-violet-ink" : "text-ink")}>
+                              <span className="text-[14px] font-bold text-ink">
                                 {link.label}
                               </span>
                               <span className="text-[12px] font-medium text-graphite/70">
