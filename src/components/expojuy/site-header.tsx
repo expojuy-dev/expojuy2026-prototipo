@@ -361,17 +361,8 @@ export function SiteHeader() {
             </ul>
           </nav>
 
-          {/* CTAs: Buscar + Expositor + Entradas */}
+          {/* CTAs: Expositor + Entradas + Toggles */}
           <div className="flex items-center gap-2">
-            {/* Selector de idioma circular visible en desktop */}
-            <LanguageToggle
-              variant="nav"
-              className="hidden md:inline-flex"
-              currentCode={lang}
-              onSelect={setLang}
-            />
-            {/* Toggle de tema siempre visible en desktop (la barra superior se oculta al scrollear) */}
-            <ThemeToggle variant="nav" className="hidden md:inline-flex" />
             {/* Buscador global (Ctrl+K) movido a la barra de navegación */}
             <Button
               asChild
@@ -392,6 +383,18 @@ export function SiteHeader() {
                 Comprar Entradas
               </a>
             </Button>
+
+            <div className="hidden h-5 w-px bg-lavender/50 md:block" aria-hidden="true" />
+
+            {/* Selector de idioma circular visible en desktop */}
+            <LanguageToggle
+              variant="nav"
+              className="hidden md:inline-flex"
+              currentCode={lang}
+              onSelect={setLang}
+            />
+            {/* Toggle de tema siempre visible en desktop (la barra superior se oculta al scrollear) */}
+            <ThemeToggle variant="nav" className="hidden md:inline-flex" />
 
             {/* Menú mobile */}
             <Sheet open={open} onOpenChange={setOpen}>
