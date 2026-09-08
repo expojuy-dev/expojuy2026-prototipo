@@ -345,6 +345,17 @@ export function SiteHeader() {
                   </DropdownMenuContent>
                 </DropdownMenu>
               </li>
+              <div className="mx-1 h-4 w-px bg-lavender/50 dark:bg-white/10" aria-hidden="true" />
+              <li>
+                <button
+                  type="button"
+                  onClick={openSearchPalette}
+                  aria-label="Abrir buscador del sitio (Ctrl+K)"
+                  className="flex h-8 w-8 items-center justify-center rounded-full text-graphite/80 transition-colors hover:bg-black/5 hover:text-turquoise-ink dark:text-white/80 dark:hover:bg-white/10"
+                >
+                  <Search className="h-4 w-4" aria-hidden="true" />
+                </button>
+              </li>
             </ul>
           </nav>
 
@@ -359,19 +370,7 @@ export function SiteHeader() {
             />
             {/* Toggle de tema siempre visible en desktop (la barra superior se oculta al scrollear) */}
             <ThemeToggle variant="nav" className="hidden md:inline-flex" />
-            {/* Buscador global (Ctrl+K) — movido desde la barra superior */}
-            <button
-              type="button"
-              onClick={openSearchPalette}
-              aria-label="Abrir buscador del sitio (Ctrl+K)"
-              className="group hidden items-center gap-1.5 rounded-full border border-lavender/50 bg-transparent px-3 py-1.5 text-graphite/80 transition hover:border-turquoise/60 hover:text-turquoise-ink md:inline-flex"
-            >
-              <Search className="h-4 w-4" aria-hidden="true" />
-              <span className="text-[12px] font-semibold">Buscar</span>
-              <kbd className="hidden rounded border border-lavender/40 bg-lavender-light px-1 font-mono text-[9px] font-bold text-graphite/60 xl:inline">
-                Ctrl K
-              </kbd>
-            </button>
+            {/* Buscador global (Ctrl+K) movido a la barra de navegación */}
             <Button
               asChild
               variant="outline"
