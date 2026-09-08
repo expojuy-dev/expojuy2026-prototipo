@@ -384,18 +384,6 @@ export function SiteHeader() {
               </a>
             </Button>
 
-            <div className="hidden h-5 w-px bg-lavender/50 md:block" aria-hidden="true" />
-
-            {/* Selector de idioma circular visible en desktop */}
-            <LanguageToggle
-              variant="nav"
-              className="hidden md:inline-flex"
-              currentCode={lang}
-              onSelect={setLang}
-            />
-            {/* Toggle de tema siempre visible en desktop (la barra superior se oculta al scrollear) */}
-            <ThemeToggle variant="nav" className="hidden md:inline-flex" />
-
             {/* Menú mobile */}
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
