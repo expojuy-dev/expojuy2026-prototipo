@@ -34,8 +34,13 @@ const INSTITUTIONAL_LINKS = [
 export function SiteFooter() {
   return (
     <footer className="relative mt-auto text-white" aria-label="Pie de página">
-      {/* Waves decorativas en la parte superior del footer (Modelo 2) */}
-      <div className="relative w-full h-14 sm:h-20 -mb-px pointer-events-none overflow-hidden" aria-hidden="true">
+      {/* 1. Newsletter ("Enterate de todo antes que nadie...") */}
+      <div className="relative bg-[#10122b] dark:bg-[#0b0c1b] border-t border-white/10 dark:border-white/5 [&>div]:border-b-0">
+        <NewsletterBand />
+      </div>
+
+      {/* 2. Waves decorativas debajo de Newsletter y arriba del cuerpo del footer (Modelo 2) */}
+      <div className="relative w-full h-14 sm:h-20 -mb-px pointer-events-none overflow-hidden bg-[#10122b] dark:bg-[#0b0c1b]" aria-hidden="true">
         <svg
           className="w-full h-full"
           fill="none"
@@ -45,11 +50,11 @@ export function SiteFooter() {
         >
           <path
             d="M0,32L60,42.7C120,53,240,75,360,74.7C480,75,600,53,720,58.7C840,64,960,96,1080,96C1200,96,1320,64,1380,48L1440,32L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"
-            className="fill-violet-600/[0.08] dark:fill-violet-600/[0.18]"
+            className="fill-violet-600/[0.10] dark:fill-violet-600/[0.20]"
           />
           <path
             d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,53.3C1120,53,1280,75,1360,85.3L1440,96L1440,120L1380,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"
-            className="fill-cyan-500/[0.12] dark:fill-cyan-500/[0.28]"
+            className="fill-cyan-500/[0.14] dark:fill-cyan-500/[0.30]"
           />
           <path
             d="M0,96L60,90.7C120,85,240,75,360,80C480,85,600,107,720,106.7C840,107,960,85,1080,80C1200,75,1320,85,1380,90.7L1440,96L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"
@@ -58,13 +63,11 @@ export function SiteFooter() {
         </svg>
       </div>
 
+      {/* 3. Cuerpo principal del footer */}
       <div className="relative bg-deep dark:bg-[#080811]">
         <div className="dots-pattern-light absolute inset-0 opacity-20" aria-hidden="true" />
 
-        {/* Newsletter */}
-        <NewsletterBand />
-
-      <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16">
+        <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Columna 1: marca */}
           <div className="flex flex-col gap-5">
