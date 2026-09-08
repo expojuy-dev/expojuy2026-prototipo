@@ -34,8 +34,6 @@ const INSTITUTIONAL_LINKS = [
 export function SiteFooter() {
   return (
     <footer className="relative mt-auto bg-deep dark:bg-[#080811] text-white" aria-label="Pie de página">
-      {/* Línea arcoíris */}
-      <div className="rainbow-line h-1.5 w-full dark:opacity-40" aria-hidden="true" />
       <div className="dots-pattern-light absolute inset-0 opacity-20" aria-hidden="true" />
 
       {/* Newsletter */}

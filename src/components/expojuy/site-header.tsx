@@ -241,8 +241,7 @@ export function SiteHeader() {
         className={cn(
           "bg-white/90 backdrop-blur-xl transition-shadow duration-300",
           "dark:bg-[#080811]/90 dark:backdrop-blur-xl",
-          scrolled ? "shadow-sm dark:shadow-[0_6px_24px_-8px_rgba(0,0,0,0.4)]" : "shadow-none",
-          "border-b border-slate-100 dark:border-white/5"
+          scrolled ? "shadow-sm dark:shadow-[0_6px_24px_-8px_rgba(0,0,0,0.4)]" : "shadow-none"
         )}
       >
         <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
@@ -505,8 +504,8 @@ export function SiteHeader() {
             </Sheet>
           </div>
         </div>
-        {/* Línea arcoíris sutil al pie del header */}
-        <div className="rainbow-line h-[3px] w-full opacity-80 dark:opacity-40" aria-hidden="true" />
+        {/* Divisor sutil para versión clara; ausente en versión oscura */}
+        <div className="h-px w-full bg-slate-200/80 dark:hidden" aria-hidden="true" />
       </div>
     </header>
   );
