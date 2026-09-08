@@ -192,14 +192,16 @@ export function SiteHeader() {
         )}
       >
         <div className="mx-auto flex h-9 max-w-7xl items-center justify-between gap-4 px-4 text-[11px] sm:px-6">
-          <div className="flex items-center gap-4 truncate">
-            <span className="inline-flex items-center gap-1.5 text-lavender">
-              <CalendarDays className="h-3.5 w-3.5 text-turquoise" aria-hidden="true" />
-              {EVENT.daysLabel}, 2026
+          <div className="flex items-center gap-3 sm:gap-4 truncate">
+            <span className="inline-flex items-center gap-1.5 text-lavender" title={`${EVENT.daysLabel}, 2026`}>
+              <CalendarDays className="h-3.5 w-3.5 shrink-0 text-turquoise" aria-hidden="true" />
+              <span className="hidden min-[360px]:inline min-[480px]:hidden">9 a 12</span>
+              <span className="hidden min-[480px]:inline">{EVENT.daysLabel}, 2026</span>
             </span>
-            <span className="hidden items-center gap-1.5 sm:inline-flex">
-              <MapPin className="h-3.5 w-3.5 text-turquoise" aria-hidden="true" />
-              {EVENT.address}
+            <span className="inline-flex items-center gap-1.5 text-lavender" title={EVENT.address}>
+              <MapPin className="h-3.5 w-3.5 shrink-0 text-turquoise" aria-hidden="true" />
+              <span className="hidden sm:inline md:hidden">Av. Teherán s/n</span>
+              <span className="hidden md:inline truncate">{EVENT.address}</span>
             </span>
           </div>
           <div className="flex items-center gap-2">
