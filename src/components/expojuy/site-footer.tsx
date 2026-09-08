@@ -33,9 +33,9 @@ const INSTITUTIONAL_LINKS = [
 
 export function SiteFooter() {
   return (
-    <footer className="relative mt-auto bg-deep text-white" aria-label="Pie de página">
+    <footer className="relative mt-auto bg-deep dark:bg-[#080811] text-white" aria-label="Pie de página">
       {/* Línea arcoíris */}
-      <div className="rainbow-line h-1.5 w-full" aria-hidden="true" />
+      <div className="rainbow-line h-1.5 w-full dark:opacity-40" aria-hidden="true" />
       <div className="dots-pattern-light absolute inset-0 opacity-20" aria-hidden="true" />
 
       {/* Newsletter */}
@@ -68,7 +68,7 @@ export function SiteFooter() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="group inline-flex items-center gap-2 text-sm text-white/70 transition hover:text-turquoise"
+                    className="group inline-flex items-center gap-2 text-sm text-white/70 transition hover:text-turquoise dark:hover:text-cyan-400"
                   >
                     <span className="h-1 w-1 rounded-full bg-lavender transition group-hover:w-3 group-hover:bg-turquoise" aria-hidden="true" />
                     {link.label}
@@ -88,7 +88,7 @@ export function SiteFooter() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="group inline-flex items-center gap-2 text-sm text-white/70 transition hover:text-turquoise"
+                    className="group inline-flex items-center gap-2 text-sm text-white/70 transition hover:text-turquoise dark:hover:text-cyan-400"
                   >
                     <span className="h-1 w-1 rounded-full bg-lavender transition group-hover:w-3 group-hover:bg-turquoise" aria-hidden="true" />
                     {link.label}
@@ -137,7 +137,7 @@ export function SiteFooter() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:-translate-y-0.5 hover:border-turquoise hover:bg-turquoise hover:text-deep"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:-translate-y-0.5 hover:border-turquoise hover:bg-turquoise hover:text-deep dark:hover:border-cyan-400 dark:hover:bg-cyan-400"
                   >
                     <Icon className="h-4.5 w-4.5" aria-hidden="true" />
                   </a>
@@ -148,8 +148,17 @@ export function SiteFooter() {
         </div>
       </div>
 
+      {/* Waves decorativas (Modelo 2) */}
+      <div className="relative w-full h-16 sm:h-24 pointer-events-none" aria-hidden="true">
+        <svg className="absolute bottom-0 w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,32L60,42.7C120,53,240,75,360,74.7C480,75,600,53,720,58.7C840,64,960,96,1080,96C1200,96,1320,64,1380,48L1440,32L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z" fill="#7c3aed" fillOpacity="0.15" />
+          <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,53.3C1120,53,1280,75,1360,85.3L1440,96L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" fill="#06b6d4" fillOpacity="0.25" />
+          <path d="M0,96L60,90.7C120,85,240,75,360,80C480,85,600,107,720,106.7C840,107,960,85,1080,80C1200,75,1320,85,1380,90.7L1440,96L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z" fill="#04050a" fillOpacity="0.9" />
+        </svg>
+      </div>
+
       {/* Línea inferior */}
-      <div className="relative border-t border-white/10">
+      <div className="relative border-t border-white/10 dark:border-white/5 dark:bg-[#04050a]">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-5 text-center text-xs text-white/50 sm:flex-row sm:px-6 sm:text-left">
           <p>
             © 2026 ExpoJuy — Cámara de Comercio Exterior de Jujuy. Todos los derechos reservados.
@@ -159,7 +168,7 @@ export function SiteFooter() {
             <a
               href="#inicio"
               aria-label="Volver arriba"
-              className="ml-2 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:border-turquoise hover:text-turquoise"
+              className="ml-2 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:border-turquoise hover:text-turquoise dark:hover:border-cyan-400 dark:hover:text-cyan-400"
             >
               <ArrowUp className="h-4 w-4" aria-hidden="true" />
             </a>
