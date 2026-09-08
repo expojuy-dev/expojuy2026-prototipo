@@ -109,44 +109,44 @@
 
 .dark {
   color-scheme: dark;
-  --surface: #2f1b4d;
-  --ink: #f2ecf9;
-  --violet-ink: #cfa3e2;
-  --turquoise-ink: #5cdccb;
-  --turquoise-light: #10333a;
-  --lavender-light: #261539;
-  --graphite: #d8cfe6;
-  --background: #1e0f33;
-  --foreground: #f5f0f8;
-  --card: #2a1745;
-  --card-foreground: #f5f0f8;
-  --popover: #2a1745;
-  --popover-foreground: #f5f0f8;
-  --primary: #2ec4b6;
-  --primary-foreground: #1e0f33;
-  --secondary: #34205a;
-  --secondary-foreground: #f5f0f8;
-  --muted: #34205a;
-  --muted-foreground: #b9a8c9;
-  --accent: #34205a;
-  --accent-foreground: #2ec4b6;
+  --surface: #0f1123;
+  --ink: #e2e8f0;
+  --violet-ink: #c4b5fd;
+  --turquoise-ink: #22d3ee;
+  --turquoise-light: #0c1a2e;
+  --lavender-light: #1a1040;
+  --graphite: #cbd5e1;
+  --background: #080811;
+  --foreground: #e2e8f0;
+  --card: #0f1123;
+  --card-foreground: #e2e8f0;
+  --popover: #0f1123;
+  --popover-foreground: #e2e8f0;
+  --primary: #7c3aed;
+  --primary-foreground: #ffffff;
+  --secondary: #121324;
+  --secondary-foreground: #e2e8f0;
+  --muted: #121324;
+  --muted-foreground: #94a3b8;
+  --accent: #0b0c1b;
+  --accent-foreground: #06b6d4;
   --destructive: #ff6369;
-  --border: rgba(255, 255, 255, 0.12);
-  --input: rgba(255, 255, 255, 0.15);
-  --ring: #2ec4b6;
-  --chart-1: #2ec4b6;
-  --chart-2: #c4a1d4;
-  --chart-3: #29abe2;
+  --border: rgba(255, 255, 255, 0.05);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: #06b6d4;
+  --chart-1: #06b6d4;
+  --chart-2: #a855f7;
+  --chart-3: #22d3ee;
   --chart-4: #f4a259;
-  --chart-5: #7b2d8e;
-  --sidebar: #2a1745;
-  --sidebar-foreground: #f5f0f8;
-  --sidebar-primary: #2ec4b6;
-  --sidebar-primary-foreground: #1e0f33;
-  --sidebar-accent: #34205a;
-  --sidebar-accent-foreground: #f5f0f8;
-  --sidebar-border: rgba(255, 255, 255, 0.12);
-  --sidebar-ring: #2ec4b6;
+  --chart-5: #7c3aed;
+  --sidebar: #0f1123;
+  --sidebar-foreground: #e2e8f0;
+  --sidebar-primary: #7c3aed;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #121324;
+  --sidebar-accent-foreground: #e2e8f0;
+  --sidebar-border: rgba(255, 255, 255, 0.05);
+  --sidebar-ring: #06b6d4;
 }
 
 @layer base {
@@ -405,4 +405,74 @@
 .dark .shadow-deep\/30,
 .dark .shadow-deep\/15 {
   --tw-shadow-color: rgba(0, 0, 0, 0.55);
+}
+
+/* ════════════════════════════════════════════════════════════
+   Modelo 2 — Glassmorphism, ambient spheres y gradientes
+   ════════════════════════════════════════════════════════════ */
+@layer utilities {
+  /* Glass card para dark mode (hero, floating cards) */
+  .glass-card-dark {
+    background: rgba(15, 17, 35, 0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .glass-card-dark-hover:hover {
+    border-color: rgba(6, 182, 212, 0.4);
+    box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.25);
+  }
+
+  /* Ambient glow spheres */
+  .ambient-sphere-violet {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.22) 0%, transparent 70%);
+    filter: blur(50px);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .ambient-sphere-cyan {
+    position: absolute;
+    width: 550px;
+    height: 550px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.18) 0%, transparent 70%);
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Glow effects */
+  .glow-cyan {
+    box-shadow: 0 0 35px -5px rgba(6, 182, 212, 0.4);
+  }
+  .glow-violet {
+    box-shadow: 0 0 35px -5px rgba(124, 58, 237, 0.4);
+  }
+
+  /* Gradient brand Modelo 2 (violet → cyan diagonal) */
+  .bg-gradient-m2 {
+    background-image: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
+  }
+  .bg-gradient-m2-reverse {
+    background-image: linear-gradient(135deg, #06b6d4 0%, #7c3aed 100%);
+  }
+  /* CTA gradient (violet → indigo → cyan) */
+  .bg-gradient-m2-cta {
+    background-image: linear-gradient(to right, #7c3aed, #4f46e5, #06b6d4);
+  }
+  /* Text gradient for headings (cyan → violet) */
+  .text-gradient-m2 {
+    background: linear-gradient(to right, #22d3ee, #a78bfa, #a855f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .text-gradient-m2-cyan {
+    background: linear-gradient(to right, #22d3ee, #06b6d4, #a78bfa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }
