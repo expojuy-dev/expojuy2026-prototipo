@@ -42,8 +42,8 @@ export function ThemeToggle({
       className={cn(
         "group relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full border transition-all duration-300 hover:scale-105 active:scale-95",
         variant === "topbar"
-          ? // Sobre la barra superior oscura
-            "h-7 w-7 border-white/20 bg-surface/10 text-white/85 hover:border-turquoise/70 hover:text-turquoise"
+          ? // Sobre la barra superior oscura / clara
+            "h-7 w-7 border-slate-200 bg-slate-50 text-slate-500 hover:text-cyan-600 hover:border-cyan-300 dark:border-white/20 dark:bg-white/5 dark:text-white/85 dark:hover:border-cyan-400 dark:hover:text-cyan-400"
           : // En la nav principal (fondo surface, se adapta claro/oscuro)
             "h-9 w-9 border-lavender/60 bg-turquoise-light text-violet-ink hover:border-turquoise hover:text-turquoise-ink",
         className

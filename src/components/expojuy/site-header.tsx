@@ -97,7 +97,7 @@ export function LanguageToggle({
           className={cn(
             "group relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full border font-extrabold tracking-tight transition-all duration-300 hover:scale-105 active:scale-95",
             variant === "topbar"
-              ? "h-7 w-7 text-[9px] border-white/20 bg-surface/10 text-white/85 hover:border-turquoise/70 hover:text-turquoise"
+              ? "h-7 w-7 text-[9px] border-slate-200 bg-slate-50 text-slate-500 hover:text-cyan-600 hover:border-cyan-300 dark:border-white/20 dark:bg-white/5 dark:text-white/85 dark:hover:border-cyan-400 dark:hover:text-cyan-400"
               : "h-9 w-9 text-[11px] border-lavender/60 bg-turquoise-light text-violet-ink hover:border-turquoise hover:text-turquoise-ink",
             className
           )}
