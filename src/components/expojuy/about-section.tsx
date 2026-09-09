@@ -2,7 +2,7 @@
 
 import {
   Lightbulb,
-  Monitor,
+  Cpu,
   Factory,
   TrendingUp,
   Handshake,
@@ -23,7 +23,7 @@ import { CamaraLogo } from "./logo";
 
 const VALUE_ICONS: Record<string, React.ElementType> = {
   lightbulb: Lightbulb,
-  monitor: Monitor,
+  cpu: Cpu,
   factory: Factory,
   "trending-up": TrendingUp,
   handshake: Handshake,
@@ -83,20 +83,25 @@ export function AboutSection() {
         />
 
         {/* Cards de valores */}
-        <StaggerContainer className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {VALUES.map((value) => {
+        <StaggerContainer className="grid grid-cols-3 gap-2 sm:gap-5 lg:gap-6">
+          {VALUES.map((value, index) => {
             const Icon = VALUE_ICONS[value.icon] ?? Lightbulb;
             return (
               <motion.div key={value.title} variants={staggerItem}>
                 <Card className="group h-full border-lavender/40 bg-surface/85 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1.5 hover:border-turquoise/50 hover:shadow-xl hover:shadow-turquoise/10">
-                  <CardContent className="flex h-full flex-col gap-4 p-6">
-                    <span
-                      className={`inline-flex h-13 w-13 items-center justify-center rounded-2xl p-3 transition-all duration-300 ${VALUE_STYLES[value.color]}`}
-                    >
-                      <Icon className="h-6 w-6" aria-hidden="true" />
-                    </span>
-                    <h3 className="font-display text-lg font-bold text-ink">{value.title}</h3>
-                    <p className="text-sm leading-relaxed text-muted-foreground">
+                  <CardContent className="flex h-full flex-col items-center justify-center text-center md:items-start md:justify-start md:text-left gap-2 md:gap-4 p-3 md:p-6">
+                    <div className="flex w-full items-center justify-center md:justify-between">
+                      <span
+                        className={`inline-flex h-10 w-10 md:h-13 md:w-13 items-center justify-center rounded-xl md:rounded-2xl p-2 md:p-3 transition-all duration-300 ${VALUE_STYLES[value.color]}`}
+                      >
+                        <Icon className="h-5 w-5 md:h-6 md:w-6" aria-hidden="true" />
+                      </span>
+                      <span className="hidden lg:block text-xs font-bold tracking-widest text-muted-foreground uppercase">
+                        Pilar 0{index + 1}
+                      </span>
+                    </div>
+                    <h3 className="font-display text-[10px] sm:text-xs md:text-lg font-bold text-ink leading-tight md:leading-normal">{value.title}</h3>
+                    <p className="hidden text-sm leading-relaxed text-muted-foreground md:block">
                       {value.description}
                     </p>
                   </CardContent>
@@ -106,34 +111,7 @@ export function AboutSection() {
           })}
         </StaggerContainer>
 
-        {/* Métricas */}
-        <ScrollReveal delay={0.1} className="mt-16">
-          <div className="gradient-ring overflow-hidden rounded-3xl bg-deep shadow-2xl shadow-deep/30">
-            <div className="dots-pattern-light absolute inset-0 opacity-30" aria-hidden="true" />
-            <div className="relative grid grid-cols-2 gap-y-10 px-6 py-12 sm:px-10 lg:grid-cols-4">
-              {STATS.map((stat) => {
-                const Icon = STAT_ICONS[stat.icon] ?? Store;
-                return (
-                  <div key={stat.label} className="flex flex-col items-center gap-2 text-center">
-                    <span className="glass flex h-11 w-11 items-center justify-center rounded-xl text-turquoise">
-                      <Icon className="h-5 w-5" aria-hidden="true" />
-                    </span>
-                    <AnimatedCounter
-                      value={stat.value}
-                      suffix={stat.suffix}
-                      className="font-display text-4xl font-extrabold text-white sm:text-5xl"
-                    />
-                    <span className="text-xs font-semibold uppercase tracking-[0.18em] text-lavender sm:text-sm">
-                      {stat.label}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-            {/* Línea arcoíris */}
-            <div className="rainbow-line h-1 w-full" aria-hidden="true" />
-          </div>
-        </ScrollReveal>
+
 
         {/* Organizador */}
         <ScrollReveal delay={0.15} className="mt-12">

@@ -15,19 +15,16 @@ export function SponsorsSection() {
     initials,
     gradient,
     size = "md",
-    border,
   }: {
     name: string;
     initials: string;
     gradient: string;
     size?: "lg" | "md" | "sm";
-    border?: string;
   }) => (
     <div
       className={cn(
-        "group/logo flex cursor-pointer flex-col items-center justify-center gap-2.5 rounded-2xl border bg-surface p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl",
-        size === "lg" && "px-8 py-7",
-        border ?? "border-lavender/40"
+        "group/logo flex cursor-pointer flex-col items-center justify-center gap-2.5",
+        size === "lg" && "px-8 py-7"
       )}
       title={name}
       tabIndex={0}
@@ -36,7 +33,7 @@ export function SponsorsSection() {
     >
       <span
         className={cn(
-          "flex items-center justify-center rounded-xl bg-gradient-to-br font-display font-extrabold text-white shadow-md grayscale transition-all duration-300 group-hover/logo:scale-105 group-hover/logo:grayscale-0",
+          "flex items-center justify-center rounded-full bg-gradient-to-br font-display font-extrabold text-white transition-all duration-300 group-hover/logo:scale-105",
           gradient,
           size === "lg" && "h-20 w-20 text-2xl",
           size === "md" && "h-14 w-14 text-lg",
@@ -68,7 +65,6 @@ export function SponsorsSection() {
           highlight="Aliados Estratégicos"
           description="Las empresas que hacen posible la feria más importante del Norte Argentino."
         />
-
         {/* Platino */}
         <ScrollReveal>
           <div className="mb-10">
@@ -81,7 +77,6 @@ export function SponsorsSection() {
                   initials={s.initials}
                   gradient={s.gradient}
                   size="lg"
-                  border="border-2 border-amber-300/80 shadow-[0_0_28px_-6px_rgba(245,180,60,0.45)]"
                 />
               ))}
             </div>
@@ -94,7 +89,7 @@ export function SponsorsSection() {
             <TierHeader icon={<Medal className="h-5 w-5" aria-hidden="true" />} label={oro.title} accent="text-slate-500" />
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
               {oro.sponsors.map((s) => (
-                <LogoTile key={s.name} name={s.name} initials={s.initials} gradient={s.gradient} border="border-2 border-slate-300/80" />
+                <LogoTile key={s.name} name={s.name} initials={s.initials} gradient={s.gradient} />
               ))}
             </div>
           </div>
@@ -104,7 +99,7 @@ export function SponsorsSection() {
         <ScrollReveal delay={0.14}>
           <div>
             <TierHeader icon={<Handshake className="h-5 w-5" aria-hidden="true" />} label={institucional.title} accent="text-violet-ink" />
-            <div className="grid grid-cols-2 gap-3 rounded-3xl bg-muted/70 p-5 sm:grid-cols-3 lg:grid-cols-6">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
               {institucional.sponsors.map((s) => (
                 <LogoTile key={s.name} name={s.name} initials={s.initials} gradient={s.gradient} size="sm" />
               ))}
@@ -137,12 +132,11 @@ export function SponsorsSection() {
 
 function TierHeader({ icon, label, accent }: { icon: React.ReactNode; label: string; accent: string }) {
   return (
-    <div className="mb-4 flex items-center gap-2.5">
+    <div className="mb-4 flex justify-center">
       <span className={cn("flex items-center gap-2 font-display text-lg font-extrabold", accent)}>
         {icon}
         {label}
       </span>
-      <span className="h-px flex-1 bg-gradient-to-r from-lavender/60 to-transparent" aria-hidden="true" />
     </div>
   );
 }

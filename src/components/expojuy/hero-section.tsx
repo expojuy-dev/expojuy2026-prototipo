@@ -2,8 +2,9 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Store, MapPin, Play, ArrowRight } from "lucide-react";
+import { Store, Play, ArrowRight } from "lucide-react";
 import { ExpoJuyIcon } from "./logo";
+import { AnimatedCounter } from "./animated-counter";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 26 },
@@ -124,15 +125,21 @@ export function HeroSection() {
             className="pt-8 border-t border-slate-200 dark:border-white/10 grid grid-cols-3 gap-4 max-w-lg"
           >
             <div>
-              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">4 Días</div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                <AnimatedCounter value={4} suffix=" Días" duration={1600} delay={700} />
+              </div>
               <p className="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 mt-0.5">Acceso Total</p>
             </div>
             <div className="border-l border-slate-200 dark:border-white/10 pl-4">
-              <div className="text-2xl sm:text-3xl font-extrabold text-cyan-600 dark:text-cyan-400 tracking-tight">350+</div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-cyan-600 dark:text-cyan-400 tracking-tight">
+                <AnimatedCounter value={350} suffix="+" duration={1600} delay={700} />
+              </div>
               <p className="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 mt-0.5">Expositores</p>
             </div>
             <div className="border-l border-slate-200 dark:border-white/10 pl-4">
-              <div className="text-2xl sm:text-3xl font-extrabold text-violet-600 dark:text-violet-400 tracking-tight">50K+</div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-violet-600 dark:text-violet-400 tracking-tight">
+                <AnimatedCounter value={50} suffix="K+" duration={1600} delay={700} />
+              </div>
               <p className="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 mt-0.5">Visitantes</p>
             </div>
           </motion.div>
@@ -144,25 +151,12 @@ export function HeroSection() {
           animate="show"
           className="w-full lg:w-auto flex flex-col items-start lg:items-end gap-5 lg:self-end pb-4"
         >
-          {/* Location Badge (dark only — on light the image fades too much) */}
-          <motion.div
-            variants={fadeUp}
-            custom={0.8}
-            className="hidden dark:inline-flex glass-card-dark rounded-full px-4 py-2 items-center gap-2 text-xs font-semibold text-white shadow-xl backdrop-blur-md"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
-            </span>
-            <MapPin className="h-3.5 w-3.5 text-violet-400" aria-hidden="true" />
-            Ciudad Cultural, Jujuy
-          </motion.div>
 
           {/* Floating Virtual Tour Card */}
           <motion.div
             variants={fadeUp}
             custom={0.95}
-            className="rounded-2xl p-4 sm:p-5 shadow-xl border flex items-center justify-between gap-4 group transition-all duration-300 w-full sm:w-80 backdrop-blur-xl border-slate-100 bg-white/95 hover:border-cyan-400 dark:glass-card-dark dark:glass-card-dark-hover dark:shadow-2xl dark:border-white/20 dark:hover:border-cyan-400/50 dark:bg-[#0b0c1b]/80"
+            className="rounded-2xl p-4 sm:p-5 shadow-xl border flex items-center justify-between gap-4 group transition-all duration-300 w-full sm:w-80 backdrop-blur-xl border-slate-100 bg-white/95 hover:border-violet-500 hover:shadow-violet-500/10 dark:glass-card-dark dark:glass-card-dark-hover dark:shadow-2xl dark:border-white/20 dark:hover:border-cyan-400/50 dark:bg-[#0b0c1b]/80"
           >
             {/* Thumbnail */}
             <div className="relative w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-violet-100 border border-violet-200/60 dark:bg-violet-950 dark:border-white/10">
@@ -171,10 +165,10 @@ export function HeroSection() {
             </div>
             {/* Info */}
             <div className="flex-1 min-w-0 pr-1">
-              <p className="text-[11px] font-bold text-cyan-600 dark:text-cyan-300 dark:font-semibold tracking-wide uppercase">
-                Recorrido Virtual
+              <p className="text-[11px] font-bold text-violet-600 dark:text-cyan-300 dark:font-semibold tracking-wide uppercase">
+                Ver Video
               </p>
-              <p className="text-xs font-bold text-slate-900 dark:text-white truncate group-hover:text-cyan-600 dark:group-hover:text-cyan-200 transition-colors">
+              <p className="text-xs font-bold text-slate-900 dark:text-white truncate group-hover:text-violet-700 dark:group-hover:text-cyan-200 transition-colors">
                 Conocé la Expo 2026
               </p>
               <span className="text-[10px] text-slate-500 dark:text-slate-400 block">
@@ -185,7 +179,7 @@ export function HeroSection() {
             <button
               type="button"
               aria-label="Ver video tour"
-              className="w-10 h-10 rounded-full flex items-center justify-center shadow-md transition-all duration-200 shrink-0 bg-violet-600 text-white group-hover:bg-cyan-500 group-hover:scale-110 active:scale-95 dark:bg-white dark:text-violet-950 dark:group-hover:bg-cyan-400 dark:group-hover:text-black dark:shadow-lg"
+              className="w-10 h-10 rounded-full flex items-center justify-center shadow-md transition-all duration-200 shrink-0 bg-violet-600 text-white group-hover:bg-violet-700 group-hover:scale-110 active:scale-95 shadow-violet-600/25 group-hover:shadow-lg group-hover:shadow-violet-600/35 dark:bg-white dark:text-violet-950 dark:group-hover:bg-cyan-400 dark:group-hover:text-black dark:shadow-lg"
             >
               <Play className="h-4 w-4 ml-0.5" fill="currentColor" aria-hidden="true" />
             </button>
