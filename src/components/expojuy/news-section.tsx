@@ -22,6 +22,7 @@ export function NewsSection() {
   const featured = NEWS.find((n) => n.featured) ?? NEWS[0];
   const rest = NEWS.filter((n) => n.id !== featured.id);
   const [open, setOpen] = React.useState<NewsItem | null>(null);
+  const [showAll, setShowAll] = React.useState(false);
 
   const newsById = React.useMemo(() => new Map(NEWS.map((n) => [n.id, n])), []);
 
@@ -125,7 +126,7 @@ export function NewsSection() {
 
         {/* Grilla de noticias */}
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {rest.map((news, i) => (
+          {(showAll ? rest : rest.slice(0, 3)).map((news, i) => (
             <ScrollReveal key={news.id} delay={Math.min(i * 0.07, 0.35)}>
               <article
                 className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-3xl border border-lavender/50 bg-surface shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-turquoise/50 hover:shadow-xl hover:shadow-turquoise/10"
@@ -176,36 +177,71 @@ export function NewsSection() {
           ))}
         </div>
 
+        {rest.length > 3 && (
+          <div className="mt-10 flex justify-center">
+            <Button
+              onClick={() => setShowAll(!showAll)}
+              variant="outline"
+              className="group rounded-full border-2 border-lavender/50 px-6 font-bold text-violet-ink transition hover:border-violet-brand hover:bg-violet-brand hover:text-white dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10 dark:hover:border-violet-400/50"
+            >
+              {showAll ? "Ocultar noticias" : "Ver más noticias"}
+              <ArrowRight 
+                className={cn(
+                  "ml-2 h-4 w-4 transition-transform", 
+                  showAll ? "-rotate-90 group-hover:-translate-y-1" : "group-hover:translate-x-1"
+                )} 
+                aria-hidden="true" 
+              />
+            </Button>
+          </div>
+        )}
+
         {/* Kit de medios */}
         <ScrollReveal delay={0.1}>
-          <div className="mt-12 flex flex-col items-center justify-between gap-5 rounded-3xl bg-deep p-7 shadow-xl shadow-deep/20 sm:flex-row sm:p-9">
-            <div className="flex items-center gap-4">
-              <span className="glass flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-turquoise">
-                <Camera className="h-7 w-7" aria-hidden="true" />
-              </span>
-              <div>
-                <h3 className="font-display text-lg font-extrabold text-white sm:text-xl">
-                  Sala de Prensa — Kit de Medios
-                </h3>
-                <p className="mt-0.5 text-sm text-white/70">
-                  Logos oficiales, fotografías en alta resolución y comunicados para prensa acreditada.
-                </p>
+          <div className="mt-12 relative overflow-hidden w-full bg-white/95 dark:bg-[#1a1236]/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/90 dark:border-purple-500/20 shadow-[0_20px_45px_-15px_rgba(99,102,241,0.08),0_4px_16px_-2px_rgba(15,23,42,0.04)] dark:shadow-2xl dark:shadow-purple-950/60 transition-all duration-300 hover:shadow-2xl hover:border-slate-300 dark:hover:border-purple-500/30 p-6 sm:p-7 md:p-8 lg:px-9 lg:py-7">
+            {/* Background subtle gradient highlights */}
+            <div aria-hidden="true" className="absolute -right-24 -top-24 w-64 h-64 bg-gradient-to-br from-cyan-100/40 via-violet-100/30 to-transparent dark:from-purple-600/10 dark:via-cyan-600/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div aria-hidden="true" className="absolute -left-20 -bottom-20 w-64 h-64 bg-gradient-to-tr from-cyan-50/50 via-slate-100/50 to-transparent dark:from-cyan-600/10 dark:via-purple-600/10 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div className="relative z-10 flex flex-col lg:flex-row items-start sm:items-center justify-between gap-6 lg:gap-8">
+              {/* Left: Icon and textual information */}
+              <div className="flex items-start sm:items-center gap-4 sm:gap-5 w-full lg:w-auto">
+                {/* Camera icon container */}
+                <div className="shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-cyan-50/80 dark:bg-white/[0.04] border border-cyan-200/80 dark:border-white/10 flex items-center justify-center shadow-inner group transition-transform duration-300 hover:scale-105 dark:hover:border-cyan-400/50">
+                  <Camera className="w-7 h-7 sm:w-8 sm:h-8 text-cyan-600 dark:text-[#00d2ff] group-hover:text-cyan-500 dark:group-hover:drop-shadow-[0_0_8px_rgba(0,210,255,0.7)] transition-all" aria-hidden="true" />
+                </div>
+                {/* Title and description */}
+                <div className="flex flex-col text-left space-y-1 sm:space-y-1.5 flex-1 min-w-0">
+                  <h2 className="font-display text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white flex flex-wrap items-center gap-2">
+                    <span>Sala de Prensa</span>
+                    <span className="text-slate-400 font-light">—</span>
+                    <span>Kit de Medios</span>
+                  </h2>
+                  <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300/90 leading-relaxed max-w-xl">
+                    Logos oficiales, fotografías en alta resolución y comunicados para prensa acreditada.
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="flex flex-wrap items-center justify-center gap-2.5">
-              <Button asChild className="bg-gradient-brand rounded-full font-bold text-white shadow-lg hover:brightness-110">
-                <a href="/images/hero-feria.png" download aria-label="Descargar foto oficial del predio">
-                  <Download className="h-4 w-4" aria-hidden="true" />
-                  Descargar kit
-                </a>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                className="rounded-full border-white/30 bg-transparent font-bold text-white hover:bg-white hover:text-deep"
-              >
-                <a href={`mailto:${EVENT.pressEmail}`}>{EVENT.pressEmail}</a>
-              </Button>
+
+              {/* Right: Call to Actions */}
+              <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 sm:gap-3.5 w-full lg:w-auto justify-start lg:justify-end shrink-0 pt-2 lg:pt-0">
+                {/* Primary CTA */}
+                <Button asChild className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2.5 px-6 py-6 sm:py-3 rounded-full text-white font-semibold text-sm sm:text-base bg-gradient-to-r from-cyan-500 via-[#00a8cc] to-violet-600 dark:from-[#00c9db] dark:via-[#2185d0] dark:to-[#8024c7] hover:from-cyan-400 hover:to-violet-500 dark:hover:from-[#00e1f7] dark:hover:to-[#912be0] shadow-[0_8px_20px_-4px_rgba(6,182,212,0.45)] dark:shadow-md dark:shadow-cyan-500/20 transition-all duration-300 hover:scale-105 active:scale-95 border-0 h-auto">
+                  <a href="/images/hero-feria.png" download aria-label="Descargar foto oficial del predio">
+                    <Download className="w-4 h-4 sm:w-5 sm:h-5 text-white/95" aria-hidden="true" />
+                    <span>Descargar kit</span>
+                  </a>
+                </Button>
+
+                {/* Secondary CTA */}
+                <Button
+                  asChild
+                  variant="outline"
+                  className="flex-1 sm:flex-initial inline-flex items-center justify-center px-5 py-6 sm:py-3 rounded-full text-slate-700 dark:text-slate-200 font-medium text-sm sm:text-base bg-slate-50/90 dark:bg-white/5 hover:bg-slate-100/90 dark:hover:bg-white/10 border border-slate-200/90 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 hover:text-slate-900 dark:hover:text-white transition-all duration-200 shadow-sm h-auto"
+                >
+                  <a href={`mailto:${EVENT.pressEmail}`}>{EVENT.pressEmail}</a>
+                </Button>
+              </div>
             </div>
           </div>
         </ScrollReveal>

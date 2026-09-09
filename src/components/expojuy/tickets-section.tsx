@@ -200,7 +200,7 @@ export function TicketsSection() {
                       t.type === "visitante" &&
                         "bg-turquoise text-white shadow-turquoise/30 hover:bg-turquoise-dark hover:shadow-turquoise/40",
                       t.type === "prensa" &&
-                        "border-2 border-violet-brand bg-surface text-violet-ink shadow-violet-brand/10 hover:bg-violet-brand hover:text-white",
+                        "bg-violet-brand text-white shadow-violet-brand/30 hover:brightness-110 hover:shadow-violet-brand/40",
                       t.type === "b2b" && "bg-gradient-brand text-white shadow-violet-brand/30 hover:brightness-110"
                     )}
                     aria-label={`${t.cta} — ${t.title}`}

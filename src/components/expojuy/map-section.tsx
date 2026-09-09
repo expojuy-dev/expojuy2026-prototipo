@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import {
   Maximize2,
   FileDown,
@@ -11,6 +12,7 @@ import {
   Info,
   Car,
   X,
+  Compass,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -105,18 +107,17 @@ export function MapSection() {
               ref={containerRef}
               className="relative overflow-hidden rounded-3xl border border-lavender/50 bg-surface shadow-sm"
             >
-              <MapSvg
-                selected={selected}
-                hovered={hovered}
-                onSelect={(z) => setSelected(z)}
-                onHover={(z, pos) => {
-                  setHovered(z);
-                  setTooltip(pos);
-                }}
-                onLeave={() => {
-                  setHovered(null);
-                  setTooltip(null);
-                }}
+              {/* North indicator */}
+              <div className="absolute top-2 right-2 z-10 flex items-center gap-1 bg-black/20 backdrop-blur-sm rounded-full p-1">
+                <Compass className="h-5 w-5 text-white" />
+                <span className="text-xs font-medium text-white">N</span>
+              </div>
+              {/* Reemplazamos el mapa interactivo por una imagen estática */}
+              <img
+                src="/mapa_expojuy.svg"
+                alt="Mapa del predio ferial"
+                className="w-full rounded-3xl border border-lavender/50 bg-surface"
+                style={{ width: '100%', height: 'auto' }}
               />
               {/* Tooltip flotante */}
               {hoverZone && tooltip ? (
