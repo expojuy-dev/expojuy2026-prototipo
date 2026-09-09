@@ -43,13 +43,11 @@ const CATEGORY_STYLES: Record<string, string> = {
   Gastronomía: "bg-amber-400/15 text-amber-700 border-amber-400/40",
 };
 
-const PAGE_SIZE = 9;
-
 export function ExhibitorsSection() {
   const [query, setQuery] = React.useState("");
   const [category, setCategory] = React.useState<string>("Todos");
   const [onlyFeatured, setOnlyFeatured] = React.useState(false);
-  const [visible, setVisible] = React.useState(PAGE_SIZE);
+  const [showAll, setShowAll] = React.useState(false);
   const [selected, setSelected] = React.useState<Exhibitor | null>(null);
   const [dialogView, setDialogView] = React.useState<"info" | "meeting">("info");
   const [voteState, setVoteState] = React.useState<{ myVote: string | null; total: number } | null>(null);
@@ -72,7 +70,7 @@ export function ExhibitorsSection() {
     });
   }, [query, category, onlyFeatured]);
 
-  React.useEffect(() => setVisible(PAGE_SIZE), [query, category, onlyFeatured]);
+  React.useEffect(() => setShowAll(false), [query, category, onlyFeatured]);
 
   const openExhibitor = (ex: Exhibitor) => {
     setSelected(ex);
@@ -115,7 +113,7 @@ export function ExhibitorsSection() {
     let alive = true;
     fetchVote()
       .then((s) => alive && setVoteState({ myVote: s.myVote, total: s.total }))
-      .catch(() => {});
+      .catch(() => { });
     const onUpdated = (e: Event) => {
       const d = (e as CustomEvent<{ myVote: string | null; total: number }>).detail;
       if (alive && d) setVoteState({ myVote: d.myVote, total: d.total });
@@ -145,7 +143,7 @@ export function ExhibitorsSection() {
     }
   };
 
-  const shown = filtered.slice(0, visible);
+  const shown = showAll ? filtered : filtered.slice(0, 8);
 
   return (
     <section id="expositores" className="bg-background py-20 sm:py-24" aria-label="Directorio de expositores">
@@ -234,7 +232,10 @@ export function ExhibitorsSection() {
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {shown.map((ex, i) => (
               <ScrollReveal key={ex.id} delay={Math.min(i * 0.05, 0.4)}>
-                <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-lavender/40 bg-surface p-5 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-turquoise/60 hover:shadow-xl hover:shadow-turquoise/10">
+                <article className={cn(
+                  "group relative h-full flex-col overflow-hidden rounded-2xl border border-lavender/40 bg-surface p-5 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-turquoise/60 hover:shadow-xl hover:shadow-turquoise/10",
+                  !showAll && i >= 4 ? "hidden sm:flex" : "flex"
+                )}>
                   {/* Acento superior por categoría + barrido de brillo al hover */}
                   <span
                     className={cn(
@@ -260,13 +261,13 @@ export function ExhibitorsSection() {
                     aria-label={favs[ex.id] ? `Quitar ${ex.name} de Mi ExpoJuy` : `Guardar ${ex.name} en Mi ExpoJuy`}
                     title="Guardar en Mi ExpoJuy"
                     className={cn(
-                      "absolute -top-3 -right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border shadow-md transition-all duration-200 hover:scale-110 active:scale-90",
+                      "absolute top-2 right-2 z-10 flex h-7 w-7 items-center justify-center rounded-full border shadow-md transition-all duration-200 hover:scale-110 active:scale-90",
                       favs[ex.id]
                         ? "border-rose-300 bg-rose-500 text-white"
                         : "border-lavender/50 bg-surface text-lavender hover:border-rose-300 hover:text-rose-400"
                     )}
                   >
-                    <Heart className={cn("h-4 w-4", favs[ex.id] && "fill-current")} aria-hidden="true" />
+                    <Heart className={cn("h-3.5 w-3.5", favs[ex.id] && "fill-current")} aria-hidden="true" />
                   </button>
 
                   <div className="flex items-start justify-between gap-3">
@@ -342,19 +343,19 @@ export function ExhibitorsSection() {
           </div>
         )}
 
-        {/* Ver más */}
-        {visible < filtered.length ? (
+        {/* Ver más / Ocultar */}
+        {filtered.length > 4 && (
           <div className="mt-10 flex justify-center">
             <Button
               variant="outline"
-              onClick={() => setVisible((v) => v + PAGE_SIZE)}
+              onClick={() => setShowAll(!showAll)}
               className="rounded-full border-2 border-violet-brand px-8 py-6 font-bold text-violet-ink transition hover:bg-violet-brand hover:text-white hover:shadow-lg hover:shadow-violet-brand/25"
             >
-              Ver más expositores ({filtered.length - visible} restantes)
-              <ChevronDown className="h-4 w-4" aria-hidden="true" />
+              {showAll ? "Ver menos expositores" : "Ver más expositores"}
+              <ChevronDown className={cn("ml-2 h-4 w-4 transition-transform", showAll && "rotate-180")} aria-hidden="true" />
             </Button>
           </div>
-        ) : null}
+        )}
       </div>
 
       {/* Dialog perfil */}
